@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -17 310 69" fill="currentColor">
+  <!-- Pixel block letter: CLAUDE CODE -->
+  <!-- Each letter is built from rectangles on a grid, matching the 8-bit block style -->
+  <!-- Grid unit = 5px, letters are ~7 units tall, ~5 units wide -->
+
+  <!-- C -->
+  <rect x="0" y="0" width="25" height="5"/>
+  <rect x="0" y="0" width="5" height="35"/>
+  <rect x="0" y="30" width="25" height="5"/>
+
+  <!-- L -->
+  <rect x="30" y="0" width="5" height="35"/>
+  <rect x="30" y="30" width="25" height="5"/>
+
+  <!-- A -->
+  <rect x="60" y="0" width="25" height="5"/>
+  <rect x="60" y="0" width="5" height="35"/>
+  <rect x="80" y="0" width="5" height="35"/>
+  <rect x="60" y="15" width="25" height="5"/>
+
+  <!-- U -->
+  <rect x="90" y="0" width="5" height="35"/>
+  <rect x="110" y="0" width="5" height="35"/>
+  <rect x="90" y="30" width="25" height="5"/>
+
+  <!-- D -->
+  <rect x="120" y="0" width="5" height="35"/>
+  <rect x="120" y="0" width="20" height="5"/>
+  <rect x="140" y="0" width="5" height="35"/>
+  <rect x="120" y="30" width="20" height="5"/>
+
+  <!-- E -->
+  <rect x="150" y="0" width="25" height="5"/>
+  <rect x="150" y="0" width="5" height="35"/>
+  <rect x="150" y="15" width="20" height="5"/>
+  <rect x="150" y="30" width="25" height="5"/>
+
+  <!-- (space) -->
+
+  <!-- C -->
+  <rect x="195" y="0" width="25" height="5"/>
+  <rect x="195" y="0" width="5" height="35"/>
+  <rect x="195" y="30" width="25" height="5"/>
+
+  <!-- O -->
+  <rect x="225" y="0" width="25" height="5"/>
+  <rect x="225" y="0" width="5" height="35"/>
+  <rect x="245" y="0" width="5" height="35"/>
+  <rect x="225" y="30" width="25" height="5"/>
+
+  <!-- D -->
+  <rect x="255" y="0" width="5" height="35"/>
+  <rect x="255" y="0" width="20" height="5"/>
+  <rect x="275" y="0" width="5" height="35"/>
+  <rect x="255" y="30" width="20" height="5"/>
+
+  <!-- E -->
+  <rect x="285" y="0" width="25" height="5"/>
+  <rect x="285" y="0" width="5" height="35"/>
+  <rect x="285" y="15" width="20" height="5"/>
+  <rect x="285" y="30" width="25" height="5"/>
+</svg>

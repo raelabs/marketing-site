@@ -1,5 +1,9 @@
 ---
-const tools = ['Claude Code', 'Cursor', 'Gemini CLI'];
+const tools = [
+  { name: 'Claude Code', logo: '/images/logos/claude-code.svg' },
+  { name: 'Cursor', logo: '/images/logos/cursor.svg' },
+  { name: 'Gemini CLI', logo: '/images/logos/gemini-cli.svg' },
+];
 ---
 
 <section class="py-8 px-6 border-y border-border">
@@ -7,10 +11,20 @@ const tools = ['Claude Code', 'Cursor', 'Gemini CLI'];
     <p class="text-center text-sm text-muted-foreground uppercase tracking-wider mb-4">
       Works with your agent harness
     </p>
-    <div class="flex flex-wrap items-center justify-center gap-8">
+    <div class="flex flex-wrap items-center justify-center gap-12">
       {tools.map((tool) => (
-        <span class="text-sm font-medium text-foreground/70">{tool}</span>
+        <img
+          src={tool.logo}
+          alt={tool.name}
+          class="harness-logo h-8 opacity-50 hover:opacity-80 transition-opacity"
+        />
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  :global(.dark) .harness-logo {
+    filter: invert(1) brightness(0.8);
+  }
+</style>
