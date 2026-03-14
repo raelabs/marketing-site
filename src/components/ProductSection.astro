@@ -34,7 +34,10 @@ const {
     layout === 'left' ? 'md:flex-row' : 'md:flex-row-reverse',
     'items-center'
   ]}>
-    <div class="flex-1 md:max-w-md">
+    <div class="flex-1 w-full order-1 md:order-none">
+      <ScreenshotPlaceholder name={screenshotName} accentColor={screenshotAccent} />
+    </div>
+    <div class="flex-1 md:max-w-md order-2 md:order-none">
       <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{headline}</h2>
       <p class="text-lg text-muted-foreground leading-relaxed">{body}</p>
       {ctaText && (
@@ -42,9 +45,6 @@ const {
           {ctaText} →
         </a>
       )}
-    </div>
-    <div class="flex-1 w-full">
-      <ScreenshotPlaceholder name={screenshotName} accentColor={screenshotAccent} />
     </div>
   </div>
 </section>

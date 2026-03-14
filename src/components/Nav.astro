@@ -8,9 +8,9 @@ const navLinks = [
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity text-foreground dark:text-primary">
-      <Logo class="h-14 w-auto" />
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity text-foreground dark:text-primary shrink-0">
+      <Logo class="h-14 w-auto max-[400px]:h-10" />
       <span class="text-2xl font-bold text-current">rae</span>
     </a>
 
@@ -48,9 +48,10 @@ const navLinks = [
     <div class="flex md:hidden items-center gap-3">
       <a
         href="#hero-screenshot"
-        class="text-sm font-medium px-3 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+        class="text-sm font-medium px-3 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
       >
-        Join Research Preview
+        <span class="hidden min-[440px]:inline">Join Research Preview</span>
+        <span class="inline min-[440px]:hidden">Join Preview</span>
       </a>
       <button
         id="mobile-menu-toggle"
