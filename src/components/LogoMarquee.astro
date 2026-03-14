@@ -21,7 +21,7 @@ const logos = [
 ---
 
 <section class:list={['logo-marquee-section py-16 overflow-hidden', className]}>
-  <div class="max-w-4xl mx-auto px-6 mb-8">
+  <div class="max-w-6xl mx-auto px-6 mb-8">
     <p class="text-center text-sm text-muted-foreground uppercase tracking-wider">
       Companies where our team has built orgs and AI
     </p>
@@ -57,7 +57,7 @@ const logos = [
 <style>
   /* Section background - use exact same oklch as --background in global.css */
   .logo-marquee-section {
-    background-color: oklch(0.985 0.008 85);
+    background-color: oklch(0.99 0.005 85);
     /* Isolate this section to prevent repaint interactions with page */
     isolation: isolate;
     contain: layout style paint;
@@ -69,7 +69,7 @@ const logos = [
   }
 
   :global(.dark) .logo-marquee-section {
-    background-color: oklch(0.18 0.015 50);
+    background-color: oklch(0.15 0.04 285);
   }
 
   /*
@@ -101,25 +101,25 @@ const logos = [
 
   /* Fade edges - interpolate in oklch to same color with 0 alpha */
   .fade-edge-left {
-    background: linear-gradient(in oklch to right, oklch(0.985 0.008 85), oklch(0.985 0.008 85 / 0));
+    background: linear-gradient(in oklch to right, oklch(0.99 0.005 85), oklch(0.99 0.005 85 / 0));
   }
 
   .fade-edge-right {
-    background: linear-gradient(in oklch to left, oklch(0.985 0.008 85), oklch(0.985 0.008 85 / 0));
+    background: linear-gradient(in oklch to left, oklch(0.99 0.005 85), oklch(0.99 0.005 85 / 0));
   }
 
   :global(.dark) .fade-edge-left {
-    background: linear-gradient(in oklch to right, oklch(0.18 0.015 50), oklch(0.18 0.015 50 / 0));
+    background: linear-gradient(in oklch to right, oklch(0.15 0.04 285), oklch(0.15 0.04 285 / 0));
   }
 
   :global(.dark) .fade-edge-right {
-    background: linear-gradient(in oklch to left, oklch(0.18 0.015 50), oklch(0.18 0.015 50 / 0));
+    background: linear-gradient(in oklch to left, oklch(0.15 0.04 285), oklch(0.15 0.04 285 / 0));
   }
 
   /* Logo colors using mask technique */
   .logo-mask {
     /* Light mode: bright golden sun color ~oklch(0.80 0.18 80) */
-    background-color: #D4A030;
+    background-color: #FFBC35;
     -webkit-mask-size: contain;
     mask-size: contain;
     -webkit-mask-repeat: no-repeat;
@@ -130,7 +130,7 @@ const logos = [
 
   :global(.dark) .logo-mask {
     /* Dark mode: deeper golden ~oklch(0.65 0.15 80) */
-    background-color: #B08020;
+    background-color: #CC9C3E;
   }
 
   /* Reduce motion for accessibility */
