@@ -8,6 +8,8 @@ interface Props {
   screenshotAccent?: string;
   layout?: 'left' | 'right';
   id?: string;
+  reveal?: boolean;
+  revealDelay?: string;
 }
 
 const {
@@ -17,10 +19,12 @@ const {
   screenshotAccent = 'var(--primary)',
   layout = 'left',
   id,
+  reveal = false,
+  revealDelay = '0s',
 } = Astro.props;
 ---
 
-<section id={id} class="py-24 px-6">
+<section id={id} class:list={['py-24 px-6', reveal && 'hero-reveal']} style={reveal ? `animation-delay: ${revealDelay};` : undefined}>
   <div class:list={[
     'max-w-6xl mx-auto flex flex-col gap-12',
     layout === 'left' ? 'md:flex-row' : 'md:flex-row-reverse',

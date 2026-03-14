@@ -14,7 +14,7 @@ const prefixes = [
 
 <section class="pt-32 pb-16 px-6">
   <div class="max-w-6xl mx-auto">
-    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.15]">
+    <h1 class="hero-reveal text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.15]" style="animation-delay: 0.2s;">
       <span class="block">The trust harness for autonomous</span>
       <span class="hero-rotating-line">
         <span class="hero-rotating-wrapper" id="hero-rotating-wrapper">
@@ -30,11 +30,11 @@ const prefixes = [
       </span>
     </h1>
 
-    <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mb-16">
+    <p class="hero-reveal text-lg md:text-xl text-muted-foreground max-w-2xl mb-16" style="animation-delay: 0.5s;">
       Battle-hardened for dev teams in the highest-risk industries
     </p>
 
-    <div id="hero-screenshot" class="max-w-5xl">
+    <div id="hero-screenshot" class="hero-reveal max-w-5xl" style="animation-delay: 0.8s;">
       <ScreenshotPlaceholder name="Lightfield" accentColor="var(--primary)" />
     </div>
   </div>
@@ -105,7 +105,22 @@ const prefixes = [
       }, 600);
     }
 
-    setInterval(next, interval);
+    // Wait for splash to finish before starting the rotation
+    function startRotation() {
+      setInterval(next, interval);
+    }
+
+    if (document.documentElement.classList.contains('splash-done')) {
+      startRotation();
+    } else {
+      var observer = new MutationObserver(function (mutations) {
+        if (document.documentElement.classList.contains('splash-done')) {
+          observer.disconnect();
+          startRotation();
+        }
+      });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    }
   })();
 </script>
 

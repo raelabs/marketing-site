@@ -154,3 +154,31 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+/* --- Shared entrance animation (blur-focus + rise + fade) --- */
+
+.hero-reveal {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(12px);
+  animation: heroReveal 1.1s ease-out forwards;
+  animation-play-state: paused;
+}
+
+.splash-done .hero-reveal {
+  animation-play-state: running;
+}
+
+@keyframes heroReveal {
+  0% { opacity: 0; filter: blur(8px); transform: translateY(12px); }
+  100% { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}

@@ -1,125 +1,101 @@
 ---
-interface Props {
-  class?: string;
-}
-
-const { class: className = '' } = Astro.props;
-
-// Company logos - companies where our team has built orgs and AI
-// height: per-logo sizing for visual balance (default h-10)
-// width: per-logo width for proper aspect ratio display
 const logos = [
-  { name: 'Cisco', src: '/images/logos/cisco.svg', height: 'h-12', width: 'w-24' },
-  { name: 'Twilio', src: '/images/logos/twilio.svg', height: 'h-12', width: 'w-40' },
-  { name: 'Uber', src: '/images/logos/uber.svg', width: 'w-28' },
-  { name: 'Indeed', src: '/images/logos/indeed.svg', width: 'w-36' },
-  { name: 'Berkeley SkyDeck', src: '/images/logos/berkeley-skydeck.svg', height: 'h-8', width: 'w-[365px]' },
-  { name: 'RetailMeNot', src: '/images/logos/retailmenot.svg', width: 'w-56' },
-  { name: 'ComPsych', src: '/images/logos/compsych.svg', width: 'w-56' },
-  { name: 'Adept', src: '/images/logos/adept.svg', width: 'w-60' },
+  { name: 'Cisco', src: '/images/logos/cisco.svg', height: 'h-10', width: 'w-20' },
+  { name: 'Twilio', src: '/images/logos/twilio.svg', height: 'h-10', width: 'w-32' },
+  { name: 'Uber', src: '/images/logos/uber.svg', height: 'h-8', width: 'w-22' },
+  { name: 'Indeed', src: '/images/logos/indeed.svg', height: 'h-8', width: 'w-28' },
+  { name: 'Berkeley SkyDeck', src: '/images/logos/berkeley-skydeck.svg', height: 'h-6', width: 'w-56' },
+  { name: 'RetailMeNot', src: '/images/logos/retailmenot.svg', height: 'h-8', width: 'w-40' },
+  { name: 'ComPsych', src: '/images/logos/compsych.svg', height: 'h-8', width: 'w-40' },
+  { name: 'Adept', src: '/images/logos/adept.svg', height: 'h-8', width: 'w-44' },
 ];
 ---
 
-<section class:list={['logo-marquee-section py-16 overflow-hidden', className]}>
-  <div class="max-w-6xl mx-auto px-6 mb-8">
-    <p class="text-center text-sm text-muted-foreground uppercase tracking-wider">
-      Companies where our team has built orgs and AI
-    </p>
-  </div>
+<section class:list={['py-12 overflow-hidden hero-reveal']} style="animation-delay: 1.1s;">
+  <div class="logo-bar relative" id="logo-bar">
+    <div class="fade-edge-left absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none hidden" />
+    <div class="fade-edge-right absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none hidden" />
 
-  <div class="logo-marquee-container relative">
-    <!-- Fade edges -->
-    <div class="fade-edge-left absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" />
-    <div class="fade-edge-right absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" />
-
-    <!-- Scrolling track - each set wrapped with trailing padding for seamless 50% loop -->
-    <div class="logo-marquee-track flex">
-      {/* First set of logos */}
-      <div class="logo-set flex items-center gap-16 pr-16">
+    <div class="logo-track flex items-center justify-center gap-10" id="logo-track">
+      <div class="logo-set flex items-center gap-10 flex-shrink-0" id="logo-set-primary">
         {logos.map((logo) => (
-          <div class:list={["logo-item flex-shrink-0 flex items-center justify-center", logo.height || 'h-10']}>
-            <div class:list={["logo-mask h-full opacity-50 hover:opacity-80 transition-opacity", logo.width || 'w-28']} style={`-webkit-mask-image: url(${logo.src}); mask-image: url(${logo.src});`} role="img" aria-label={logo.name}></div>
-          </div>
+          <div
+            class:list={['logo-mask flex-shrink-0 opacity-50 hover:opacity-80 transition-opacity', logo.height || 'h-8', logo.width]}
+            style={`-webkit-mask-image: url(${logo.src}); mask-image: url(${logo.src});`}
+            role="img"
+            aria-label={logo.name}
+          ></div>
         ))}
       </div>
-      {/* Duplicate for seamless loop */}
-      <div class="logo-set flex items-center gap-16 pr-16" aria-hidden="true">
+      <div class="logo-set flex items-center gap-10 flex-shrink-0 hidden" id="logo-set-duplicate" aria-hidden="true">
         {logos.map((logo) => (
-          <div class:list={["logo-item flex-shrink-0 flex items-center justify-center", logo.height || 'h-10']}>
-            <div class:list={["logo-mask h-full opacity-50 hover:opacity-80 transition-opacity", logo.width || 'w-28']} style={`-webkit-mask-image: url(${logo.src}); mask-image: url(${logo.src});`}></div>
-          </div>
+          <div
+            class:list={['logo-mask flex-shrink-0 opacity-50', logo.height || 'h-8', logo.width]}
+            style={`-webkit-mask-image: url(${logo.src}); mask-image: url(${logo.src});`}
+          ></div>
         ))}
       </div>
     </div>
   </div>
 </section>
 
+<script is:inline>
+  (function () {
+    var SPEED = 20; // px per second — constant regardless of content width
+    var bar = document.getElementById('logo-bar');
+    var track = document.getElementById('logo-track');
+    var primary = document.getElementById('logo-set-primary');
+    var duplicate = document.getElementById('logo-set-duplicate');
+    if (!bar || !track || !primary || !duplicate) return;
+
+    function check() {
+      // Reset to measure natural width
+      track.style.animation = 'none';
+      track.style.justifyContent = 'center';
+      duplicate.classList.add('hidden');
+      bar.querySelectorAll('.fade-edge-left, .fade-edge-right').forEach(function (el) {
+        el.classList.add('hidden');
+      });
+
+      var containerWidth = bar.clientWidth;
+      var contentWidth = primary.scrollWidth;
+
+      if (contentWidth > containerWidth) {
+        // Use flex-start to override the Tailwind justify-center class
+        track.style.justifyContent = 'flex-start';
+        duplicate.classList.remove('hidden');
+        bar.querySelectorAll('.fade-edge-left, .fade-edge-right').forEach(function (el) {
+          el.classList.remove('hidden');
+        });
+
+        // The scroll distance is one full set width + the gap between sets.
+        // 2.5rem gap = 40px at default font size.
+        var gap = 40;
+        track.style.gap = gap + 'px';
+
+        // Force reflow so the browser lays out the duplicate set
+        void track.offsetWidth;
+
+        var scrollDist = primary.scrollWidth + gap;
+        var duration = scrollDist / SPEED;
+
+        track.style.setProperty('--scroll-dist', '-' + scrollDist + 'px');
+        track.style.animation = 'marquee ' + duration + 's linear infinite';
+      }
+    }
+
+    check();
+    var timer;
+    window.addEventListener('resize', function () {
+      clearTimeout(timer);
+      timer = setTimeout(check, 150);
+    });
+  })();
+</script>
+
 <style>
-  /* Section background - use exact same oklch as --background in global.css */
-  .logo-marquee-section {
-    background-color: oklch(0.99 0.005 85);
-    /* Isolate this section to prevent repaint interactions with page */
-    isolation: isolate;
-    contain: layout style paint;
-  }
-
-  .logo-marquee-container {
-    /* Force GPU layer for the container */
-    transform: translateZ(0);
-  }
-
-  :global(.dark) .logo-marquee-section {
-    background-color: oklch(0.15 0.04 285);
-  }
-
-  /*
-   * Animation duration: consistent ~60-70 px/s across all viewports.
-   * 2077px / 32s = 65 px/s
-   */
-  .logo-marquee-track {
-    animation: marquee 32s linear infinite;
-  }
-
-  .logo-marquee-container:hover .logo-marquee-track {
-    animation-play-state: paused;
-  }
-
-  /* GPU acceleration for smooth animation */
-  .logo-marquee-track {
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-
-  @keyframes marquee {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-    100% {
-      transform: translate3d(-2077px, 0, 0);
-    }
-  }
-
-  /* Fade edges - interpolate in oklch to same color with 0 alpha */
-  .fade-edge-left {
-    background: linear-gradient(in oklch to right, oklch(0.99 0.005 85), oklch(0.99 0.005 85 / 0));
-  }
-
-  .fade-edge-right {
-    background: linear-gradient(in oklch to left, oklch(0.99 0.005 85), oklch(0.99 0.005 85 / 0));
-  }
-
-  :global(.dark) .fade-edge-left {
-    background: linear-gradient(in oklch to right, oklch(0.15 0.04 285), oklch(0.15 0.04 285 / 0));
-  }
-
-  :global(.dark) .fade-edge-right {
-    background: linear-gradient(in oklch to left, oklch(0.15 0.04 285), oklch(0.15 0.04 285 / 0));
-  }
-
-  /* Logo colors using mask technique */
   .logo-mask {
-    /* Light mode: bright golden sun color ~oklch(0.80 0.18 80) */
-    background-color: #FFBC35;
+    background-color: currentColor;
     -webkit-mask-size: contain;
     mask-size: contain;
     -webkit-mask-repeat: no-repeat;
@@ -128,15 +104,34 @@ const logos = [
     mask-position: center;
   }
 
-  :global(.dark) .logo-mask {
-    /* Dark mode: deeper golden ~oklch(0.65 0.15 80) */
-    background-color: #CC9C3E;
+  .logo-bar {
+    overflow: hidden;
   }
 
-  /* Reduce motion for accessibility */
+  .logo-bar:hover .logo-track {
+    animation-play-state: paused;
+  }
+
+  .logo-track {
+    will-change: transform;
+  }
+
+  @keyframes marquee {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(var(--scroll-dist), 0, 0); }
+  }
+
+  .fade-edge-left {
+    background: linear-gradient(to right, var(--background), transparent);
+  }
+
+  .fade-edge-right {
+    background: linear-gradient(to left, var(--background), transparent);
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .logo-marquee-track {
-      animation: none;
+    .logo-track {
+      animation: none !important;
     }
   }
 </style>
