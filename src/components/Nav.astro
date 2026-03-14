@@ -1,32 +1,24 @@
 ---
 import Logo from './Logo.astro';
-import { ContactButton } from './ContactButton';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/team', label: 'Team' },
+  { href: '#products', label: 'Products' },
   { href: '/blog', label: 'Blog' },
 ];
-
-const currentPath = Astro.url.pathname;
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-  <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href="/" class="flex items-center hover:opacity-80 transition-opacity text-foreground">
       <Logo class="h-14 w-auto" />
     </a>
-    
-    <div class="flex items-center gap-4">
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-6">
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class:list={[
-            'text-sm font-medium transition-colors hover:text-primary',
-            currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
-              ? 'text-primary'
-              : 'text-muted-foreground'
-          ]}
+          class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
         >
           {link.label}
         </a>
@@ -43,15 +35,74 @@ const currentPath = Astro.url.pathname;
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
         </svg>
       </button>
-<ContactButton client:load source="nav" variant="primary" />
+      <a
+        href="#hero-screenshot"
+        class="text-sm font-medium px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+      >
+        Product Preview
+      </a>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="flex md:hidden items-center gap-3">
+      <a
+        href="#hero-screenshot"
+        class="text-sm font-medium px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+      >
+        Product Preview
+      </a>
+      <button
+        id="mobile-menu-toggle"
+        class="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+        aria-label="Toggle menu"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu panel -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-background/95 backdrop-blur-sm">
+    <div class="px-6 py-4 flex flex-col gap-3">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+        >
+          {link.label}
+        </a>
+      ))}
+      <button
+        id="theme-toggle-mobile"
+        class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 text-left"
+      >
+        Toggle theme
+      </button>
     </div>
   </div>
 </nav>
 
 <script>
-  const toggle = document.getElementById('theme-toggle');
-  toggle?.addEventListener('click', () => {
+  function toggleTheme() {
     const isDark = document.documentElement.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+
+  document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
   });
 </script>
