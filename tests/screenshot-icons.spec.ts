@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
 
+// These tests are skipped because the ContactForm modal has been removed from the homepage
+// as part of the product launch redesign. The homepage now has a Product Preview CTA instead.
 test.describe('Contact Form Icons', () => {
-  test('all agent icons render correctly', async ({ page, context }) => {
+  test.skip('all agent icons render correctly', async ({ page, context }) => {
     // Clear cache
     await context.clearCookies();
 
@@ -32,7 +34,7 @@ test.describe('Contact Form Icons', () => {
     }
   });
 
-  test('captures visual screenshots', async ({ page, context }) => {
+  test.skip('captures visual screenshots', async ({ page, context }) => {
     // Clear cache
     await context.clearCookies();
 
