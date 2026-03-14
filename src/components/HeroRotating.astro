@@ -1,0 +1,82 @@
+---
+import ScreenshotPlaceholder from './ScreenshotPlaceholder.astro';
+
+const prefixes = [
+  'Software',
+  'Backend',
+  'UI',
+  'Data',
+  'Native app',
+  'Platform',
+  'Infrastructure',
+];
+---
+
+<section class="pt-32 pb-16 px-6">
+  <div class="max-w-6xl mx-auto text-center">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
+      <span class="block">The trust harness for autonomous</span>
+      <span class="block">
+        <span class="hero-rotating-wrapper inline-block relative overflow-hidden align-bottom">
+          {prefixes.map((prefix, i) => (
+            <span
+              class="hero-rotating-item"
+              style={`animation-delay: ${i * 3.5}s;`}
+              aria-hidden={i > 0 ? 'true' : undefined}
+            >
+              {prefix}
+            </span>
+          ))}
+        </span>{' '}
+        <span>engineering</span>
+      </span>
+    </h1>
+
+    <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-16">
+      Battle-hardened for dev teams in the highest-risk industries
+    </p>
+
+    <div id="hero-screenshot" class="max-w-4xl mx-auto">
+      <ScreenshotPlaceholder name="Lightfield" accentColor="var(--primary)" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-rotating-wrapper {
+    height: 1.15em;
+  }
+
+  .hero-rotating-item {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: right;
+    color: var(--primary);
+    opacity: 0;
+    animation: heroRotate 24.5s ease-in-out infinite;
+  }
+
+  .hero-rotating-item:first-child {
+    position: relative;
+  }
+
+  @keyframes heroRotate {
+    0%     { opacity: 0; transform: translateY(20%); }
+    1%     { opacity: 1; transform: translateY(0); }
+    11%    { opacity: 1; transform: translateY(0); }
+    13%    { opacity: 0; transform: translateY(-20%); }
+    14.28% { opacity: 0; }
+    100%   { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rotating-item {
+      animation: none;
+    }
+    .hero-rotating-item:first-child {
+      opacity: 1;
+    }
+  }
+</style>
