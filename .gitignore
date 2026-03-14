@@ -49,5 +49,8 @@ pr-screenshots/
 # Worktrees
 .worktrees/
 
+# Superpowers brainstorming
+.superpowers/
+
 # Wrangler local state
 .wrangler/
