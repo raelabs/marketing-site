@@ -41,6 +41,13 @@ pnpm test       # Run all Playwright tests
 pnpm test:ui    # Run tests with Playwright UI
 ```
 
+## Pre-Push Verification
+
+**Always run `pnpm build && pnpm test` before pushing.** CI runs both — a passing build does not mean tests pass. Common test failures:
+- Navigation tests check for specific CTA button text — update tests when renaming buttons/links
+- SEO tests check meta tags, H1 counts, title lengths
+- Accessibility tests run axe-core on every page
+
 ## Project Structure
 
 ```
