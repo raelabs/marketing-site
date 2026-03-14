@@ -42,136 +42,107 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
-  /* Sunrise palette - for hero and illustrations */
-  --color-sunrise-horizon: var(--sunrise-horizon);
-  --color-sunrise-corona: var(--sunrise-corona);
-  --color-sunrise-sky-mid: var(--sunrise-sky-mid);
-  --color-sunrise-sky-upper: var(--sunrise-sky-upper);
-  --color-sunrise-hills-near: var(--sunrise-hills-near);
-  --color-sunrise-hills-far: var(--sunrise-hills-far);
-  --color-sunrise-silhouette: var(--sunrise-silhouette);
+  --color-primary-subdued: var(--primary-subdued);
+  --color-secondary-subdued: var(--secondary-subdued);
+  --color-accent-subdued: var(--accent-subdued);
 }
 
-/* Solarpunk Theme - RAE Partners */
-/* Accessibility-compliant colors (WCAG AA contrast ratios) */
 :root {
   --radius: 0.625rem;
-  
-  /* Warm white background with subtle cream warmth */
-  --background: oklch(0.985 0.008 85);
-  --foreground: oklch(0.25 0.02 50);
-  
-  /* Cards slightly warmer than background */
-  --card: oklch(0.99 0.005 85);
-  --card-foreground: oklch(0.25 0.02 50);
-  
-  --popover: oklch(0.99 0.005 85);
-  --popover-foreground: oklch(0.25 0.02 50);
-  
-  /* Primary: Deep solar gold (darkened for 4.5:1 contrast on white) */
-  /* Original was 0.75, darkened to 0.55 for accessibility */
-  --primary: oklch(0.55 0.16 75);
-  --primary-foreground: oklch(0.98 0.005 85);
-  
-  /* Secondary: Muted earth tones */
-  --secondary: oklch(0.94 0.015 85);
-  --secondary-foreground: oklch(0.3 0.02 50);
-  
-  --muted: oklch(0.94 0.01 85);
-  --muted-foreground: oklch(0.45 0.02 50);
-  
-  /* Accent: Verdant green (darkened for accessibility) */
-  --accent: oklch(0.5 0.12 160);
-  --accent-foreground: oklch(0.98 0.005 85);
-  
-  --destructive: oklch(0.5 0.18 25);
-  
-  /* Borders and inputs - warm subtle */
-  --border: oklch(0.88 0.015 85);
-  --input: oklch(0.92 0.01 85);
-  --ring: oklch(0.55 0.16 75);
-  
-  /* Chart colors - solarpunk palette */
-  --chart-1: oklch(0.55 0.16 75);   /* Solar gold */
-  --chart-2: oklch(0.5 0.12 160);   /* Verdant green */
-  --chart-3: oklch(0.5 0.1 200);    /* Sky blue */
-  --chart-4: oklch(0.55 0.12 40);   /* Terra cotta */
-  --chart-5: oklch(0.55 0.08 280);  /* Lavender */
-  
-  /* Sidebar - same warm palette */
-  --sidebar: oklch(0.98 0.008 85);
-  --sidebar-foreground: oklch(0.25 0.02 50);
-  --sidebar-primary: oklch(0.55 0.16 75);
-  --sidebar-primary-foreground: oklch(0.98 0.005 85);
-  --sidebar-accent: oklch(0.94 0.015 85);
-  --sidebar-accent-foreground: oklch(0.3 0.02 50);
-  --sidebar-border: oklch(0.88 0.015 85);
-  --sidebar-ring: oklch(0.55 0.16 75);
 
-  /* Sunrise palette - for hero illustration */
-  --sunrise-horizon: oklch(0.80 0.18 80);    /* Rich warm gold */
-  --sunrise-corona: oklch(0.70 0.20 75);     /* Saturated solar gold */
-  --sunrise-sky-mid: oklch(0.75 0.12 280);   /* Visible lavender */
-  --sunrise-sky-upper: oklch(0.85 0.08 220); /* Clear sky blue */
-  --sunrise-hills-near: oklch(0.60 0.10 160);/* Verdant green */
-  --sunrise-hills-far: oklch(0.70 0.08 160); /* Lighter green */
-  --sunrise-silhouette: oklch(0.35 0.08 160);/* Dark green depth */
+  --background: oklch(0.99 0.005 85);       /* #FEFDFB */
+  --foreground: oklch(0.30 0.00 0);          /* #363636 */
+
+  --card: oklch(0.99 0.005 85);
+  --card-foreground: oklch(0.30 0.00 0);
+
+  --popover: oklch(0.99 0.005 85);
+  --popover-foreground: oklch(0.30 0.00 0);
+
+  --primary: oklch(0.82 0.17 80);            /* #FFBC35 */
+  --primary-foreground: oklch(0.20 0.00 0);
+
+  --secondary: oklch(0.74 0.14 120);         /* #A5BE41 */
+  --secondary-foreground: oklch(0.20 0.00 0);
+
+  --muted: oklch(0.92 0.03 115);             /* Secondary Subdued #E6E9D8 */
+  --muted-foreground: oklch(0.75 0.05 70);   /* Text Subdued #C9AF8F */
+
+  --accent: oklch(0.65 0.16 15);             /* #F4767A */
+  --accent-foreground: oklch(0.99 0.005 85);
+
+  --destructive: oklch(0.50 0.18 25);
+
+  --border: oklch(0.90 0.02 85);
+  --input: oklch(0.92 0.01 85);
+  --ring: oklch(0.82 0.17 80);
+
+  --chart-1: oklch(0.82 0.17 80);
+  --chart-2: oklch(0.74 0.14 120);
+  --chart-3: oklch(0.65 0.16 15);
+  --chart-4: oklch(0.55 0.12 40);
+  --chart-5: oklch(0.55 0.08 280);
+
+  --primary-subdued: oklch(0.95 0.06 85);    /* #FFEECC */
+  --secondary-subdued: oklch(0.92 0.03 115); /* #E6E9D8 */
+  --accent-subdued: oklch(0.91 0.04 15);     /* #FEDCDD */
+
+  --sidebar: oklch(0.99 0.005 85);
+  --sidebar-foreground: oklch(0.30 0.00 0);
+  --sidebar-primary: oklch(0.82 0.17 80);
+  --sidebar-primary-foreground: oklch(0.20 0.00 0);
+  --sidebar-accent: oklch(0.92 0.03 115);
+  --sidebar-accent-foreground: oklch(0.30 0.00 0);
+  --sidebar-border: oklch(0.90 0.02 85);
+  --sidebar-ring: oklch(0.82 0.17 80);
 }
 
 .dark {
-  --background: oklch(0.18 0.015 50);
-  --foreground: oklch(0.95 0.008 85);
-  
-  --card: oklch(0.22 0.015 50);
-  --card-foreground: oklch(0.95 0.008 85);
-  
-  --popover: oklch(0.22 0.015 50);
-  --popover-foreground: oklch(0.95 0.008 85);
-  
-  /* Primary: Solar gold (brighter in dark mode for contrast) */
-  --primary: oklch(0.75 0.18 80);
-  --primary-foreground: oklch(0.15 0.02 50);
-  
-  --secondary: oklch(0.28 0.015 50);
-  --secondary-foreground: oklch(0.95 0.008 85);
-  
-  --muted: oklch(0.28 0.015 50);
-  --muted-foreground: oklch(0.65 0.015 50);
-  
-  /* Accent: Verdant green */
-  --accent: oklch(0.65 0.18 160);
-  --accent-foreground: oklch(0.98 0.005 85);
-  
-  --destructive: oklch(0.65 0.22 25);
-  
-  --border: oklch(0.32 0.015 50);
-  --input: oklch(0.28 0.015 50);
-  --ring: oklch(0.75 0.18 80);
-  
-  --chart-1: oklch(0.75 0.18 80);
-  --chart-2: oklch(0.65 0.18 160);
-  --chart-3: oklch(0.55 0.15 200);
-  --chart-4: oklch(0.6 0.18 40);
-  --chart-5: oklch(0.65 0.12 280);
-  
-  --sidebar: oklch(0.2 0.015 50);
-  --sidebar-foreground: oklch(0.95 0.008 85);
-  --sidebar-primary: oklch(0.75 0.18 80);
-  --sidebar-primary-foreground: oklch(0.15 0.02 50);
-  --sidebar-accent: oklch(0.28 0.015 50);
-  --sidebar-accent-foreground: oklch(0.95 0.008 85);
-  --sidebar-border: oklch(0.32 0.015 50);
-  --sidebar-ring: oklch(0.75 0.18 80);
+  --background: oklch(0.15 0.04 285);        /* #140C27 - deep indigo */
+  --foreground: oklch(0.77 0.00 0);           /* #B8B8B8 */
 
-  /* Sunrise palette - golden hour/pre-dawn for dark mode */
-  --sunrise-horizon: oklch(0.65 0.15 80);    /* Richer gold */
-  --sunrise-corona: oklch(0.55 0.18 75);     /* Deeper gold */
-  --sunrise-sky-mid: oklch(0.35 0.06 280);   /* Deep lavender */
-  --sunrise-sky-upper: oklch(0.25 0.04 260); /* Deep twilight blue */
-  --sunrise-hills-near: oklch(0.30 0.08 160);/* Dark silhouette */
-  --sunrise-hills-far: oklch(0.35 0.06 160); /* Slightly lighter */
-  --sunrise-silhouette: oklch(0.20 0.06 160);/* Deep shadow */
+  --card: oklch(0.19 0.04 285);
+  --card-foreground: oklch(0.77 0.00 0);
+
+  --popover: oklch(0.19 0.04 285);
+  --popover-foreground: oklch(0.77 0.00 0);
+
+  --primary: oklch(0.70 0.14 78);             /* #CC9C3E */
+  --primary-foreground: oklch(0.15 0.04 285);
+
+  --secondary: oklch(0.60 0.14 145);          /* #55A254 */
+  --secondary-foreground: oklch(0.99 0.005 85);
+
+  --muted: oklch(0.22 0.03 285);
+  --muted-foreground: oklch(0.45 0.10 250);   /* Text Subdued #375D90 */
+
+  --accent: oklch(0.65 0.16 15);
+  --accent-foreground: oklch(0.99 0.005 85);
+
+  --destructive: oklch(0.65 0.22 25);
+
+  --border: oklch(0.25 0.03 285);
+  --input: oklch(0.22 0.03 285);
+  --ring: oklch(0.70 0.14 78);
+
+  --chart-1: oklch(0.70 0.14 78);
+  --chart-2: oklch(0.60 0.14 145);
+  --chart-3: oklch(0.65 0.16 15);
+  --chart-4: oklch(0.60 0.18 40);
+  --chart-5: oklch(0.65 0.12 280);
+
+  --primary-subdued: oklch(0.74 0.05 75);     /* #BFAC88 */
+  --secondary-subdued: oklch(0.88 0.06 145);  /* #C5E3C4 */
+  --accent-subdued: oklch(0.91 0.04 15);
+
+  --sidebar: oklch(0.17 0.04 285);
+  --sidebar-foreground: oklch(0.77 0.00 0);
+  --sidebar-primary: oklch(0.70 0.14 78);
+  --sidebar-primary-foreground: oklch(0.15 0.04 285);
+  --sidebar-accent: oklch(0.22 0.03 285);
+  --sidebar-accent-foreground: oklch(0.77 0.00 0);
+  --sidebar-border: oklch(0.25 0.03 285);
+  --sidebar-ring: oklch(0.70 0.14 78);
 }
 
 @layer base {
