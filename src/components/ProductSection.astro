@@ -10,6 +10,8 @@ interface Props {
   id?: string;
   reveal?: boolean;
   revealDelay?: string;
+  ctaText?: string;
+  ctaHref?: string;
 }
 
 const {
@@ -21,6 +23,8 @@ const {
   id,
   reveal = false,
   revealDelay = '0s',
+  ctaText,
+  ctaHref = '#',
 } = Astro.props;
 ---
 
@@ -33,6 +37,11 @@ const {
     <div class="flex-1 md:max-w-md">
       <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{headline}</h2>
       <p class="text-lg text-muted-foreground leading-relaxed">{body}</p>
+      {ctaText && (
+        <a href={ctaHref} class="inline-block mt-8 text-lg text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors">
+          {ctaText} →
+        </a>
+      )}
     </div>
     <div class="flex-1 w-full">
       <ScreenshotPlaceholder name={screenshotName} accentColor={screenshotAccent} />

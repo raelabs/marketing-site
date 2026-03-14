@@ -29,6 +29,8 @@ import TraceBar from '../components/TraceBar.astro';
       layout="left"
       reveal
       revealDelay="1.4s"
+      ctaText="Learn more about the enforcement harness"
+      ctaHref="#"
     />
     <AgentHarnessBar />
     <ProductSection
@@ -37,8 +39,23 @@ import TraceBar from '../components/TraceBar.astro';
       screenshotName="Lightfield"
       screenshotAccent="var(--primary)"
       layout="right"
+      ctaText="Learn more about the context control plane"
+      ctaHref="#"
     />
     <TraceBar />
+
+    <section class="py-24 px-6 bg-muted/20">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Ready to trust your (agent) dev team?</h2>
+        <p class="text-lg text-muted-foreground mb-8">Join the research preview and start autonomously engineering, responsibly.</p>
+        <a
+          href="#hero-screenshot"
+          class="inline-block text-base font-medium px-8 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+        >
+          Join Research Preview
+        </a>
+      </div>
+    </section>
   </main>
 
   <Footer />
