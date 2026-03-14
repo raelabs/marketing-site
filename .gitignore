@@ -46,5 +46,8 @@ docs/plans/
 # PR screenshots (uploaded to R2, not committed)
 pr-screenshots/
 
+# Worktrees
+.worktrees/
+
 # Wrangler local state
 .wrangler/
