@@ -2,72 +2,41 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import Sun from '../components/Sun.astro';
+import Splash from '../components/Splash.astro';
+import HeroRotating from '../components/HeroRotating.astro';
 import LogoMarquee from '../components/LogoMarquee.astro';
-import { ContactButton } from '../components/ContactButton';
+import ProductSection from '../components/ProductSection.astro';
+import AgentHarnessBar from '../components/AgentHarnessBar.astro';
+import TraceBar from '../components/TraceBar.astro';
 ---
 
 <BaseLayout
   title="rae"
-  description="AI advantages are compounding fast. rae helps engineering teams trust AI coding agents at scale with battle-tested tools and practices."
+  description="The trust harness for autonomous engineering. Battle-hardened tools for dev teams in the highest-risk industries."
 >
+  <Splash />
   <Nav />
 
-  <!-- Sunrise gradient background - site-level, extends to top of viewport -->
-  <div class="fixed inset-0 -z-10 pointer-events-none">
-    <!-- Sky gradient - upper to mid -->
-    <div class="absolute inset-0 bg-gradient-to-b from-sunrise-sky-upper via-sunrise-sky-mid to-transparent opacity-30 dark:opacity-40" />
-    <!-- Horizon glow - centered vertically -->
-    <div class="absolute inset-x-0 top-1/3 bottom-0 bg-gradient-to-t from-sunrise-horizon/20 via-sunrise-corona/10 to-transparent" />
-    <!-- Base fade to background -->
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
-  </div>
-
-  <main class="pt-24">
-    <!-- Hero Section -->
-    <section class="min-h-[80vh] flex flex-col items-center justify-center px-6 relative overflow-hidden">
-      <!-- SVG Sun - partially risen from bottom of hero -->
-      <div class="absolute inset-x-0 bottom-0 flex justify-center pointer-events-none">
-        <Sun class="w-full max-w-5xl translate-y-[7.5%]" />
-      </div>
-
-      <div class="max-w-4xl mx-auto text-center relative z-10">
-        <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground mb-8">
-          <span class="block">Responsible.</span>
-          <span class="block">Autonomous.</span>
-          <span class="block">Engineering.</span>
-        </h1>
-
-        <p class="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed">
-          Everyone&apos;s deploying AI. Few are doing it well.<br class="hidden md:block" />
-          That productivity and quality advantage is <span class="whitespace-nowrap">compounding fast.</span>
-        </p>
-
-        <p class="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-          We can help you catch up.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="/blog/year-of-autonomous-engineering"
-            class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            Read our thinking
-          </a>
-<ContactButton
-            client:load
-            source="homepage_cta"
-            variant="primary"
-            className="px-8 py-4 text-lg border border-border bg-background text-foreground hover:bg-muted hover:text-foreground"
-          >
-            Get in touch
-          </ContactButton>
-        </div>
-      </div>
-    </section>
-
-    <!-- Logo credibility section -->
+  <main>
+    <HeroRotating />
     <LogoMarquee />
+    <ProductSection
+      id="products"
+      headline="Full autonomy with full control"
+      body="Deterministic, granular, context-anchored permissions for coding agents that adapt to the kinds of work they're doing at any moment. The blast radius of autonomous engineering demands more than a pre-commit hook."
+      screenshotName="Prism"
+      screenshotAccent="var(--secondary)"
+      layout="left"
+    />
+    <AgentHarnessBar />
+    <ProductSection
+      headline="Manage massive agent teams with confidence"
+      body="Real-time agent health and progressive code reviews that answer how and why implementation choices are made. 2-10x your team without losing any context (or your sanity)."
+      screenshotName="Lightfield"
+      screenshotAccent="var(--primary)"
+      layout="right"
+    />
+    <TraceBar />
   </main>
 
   <Footer />
