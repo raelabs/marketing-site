@@ -2,7 +2,8 @@
 export const routes = [
   { path: '/', name: 'Home' },
   { path: '/team', name: 'Team' },
-  { path: '/contact', name: 'Contact' },
+  { path: '/preview/join', name: 'Join the Research Preview' },
+  { path: '/products/lightfield', name: 'Lightfield' },
   { path: '/blog', name: 'Blog Index' },
   { path: '/blog/year-of-autonomous-engineering', name: 'Launch Post' },
 ];

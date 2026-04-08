@@ -36,7 +36,7 @@ test.describe('Navigation Tests', () => {
     await page.goto('/');
 
     // Check Research Preview CTA link in nav
-    const researchPreviewCTA = page.locator('a:has-text("Join Research Preview")');
+    const researchPreviewCTA = page.locator('button:has-text("Join Research Preview"), a:has-text("Join Research Preview")');
     expect(await researchPreviewCTA.count()).toBeGreaterThan(0);
   });
 
