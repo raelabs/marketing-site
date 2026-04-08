@@ -32,7 +32,7 @@ export function ContactButton({
   const handleClick = (e: React.MouseEvent) => {
     if (isMobile) {
       // Navigate to contact page on mobile
-      window.location.href = '/contact';
+      window.location.href = '/preview/join';
     } else {
       // Open modal on desktop
       e.preventDefault();

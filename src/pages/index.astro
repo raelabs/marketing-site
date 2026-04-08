@@ -8,6 +8,7 @@ import LogoMarquee from '../components/LogoMarquee.astro';
 import ProductSection from '../components/ProductSection.astro';
 import AgentHarnessBar from '../components/AgentHarnessBar.astro';
 import TraceBar from '../components/TraceBar.astro';
+import { ContactButton } from '../components/ContactButton';
 ---
 
 <BaseLayout
@@ -22,38 +23,38 @@ import TraceBar from '../components/TraceBar.astro';
     <LogoMarquee />
     <ProductSection
       id="products"
+      headline="Manage massive agent teams with confidence"
+      body="Real-time work tracking, decision tracing, and code reviews. 2-10x your team without losing any context (or sanity)."
+      screenshotName="Lightfield"
+      screenshotAccent="var(--primary)"
+      layout="left"
+      reveal
+      revealDelay="1.4s"
+      ctaText="Learn more about the context control plane"
+      ctaHref="/products/lightfield"
+    />
+    <AgentHarnessBar />
+    <ProductSection
       headline="Full autonomy with full control"
       body="Deterministic, granular, context-anchored permissions for coding agents. The blast radius of AI errors demands more than a container and a pre-commit hook."
       screenshotName="Prism"
       screenshotAccent="var(--secondary)"
-      layout="left"
-      reveal
-      revealDelay="1.4s"
-      ctaText="Learn more about the enforcement harness"
-      ctaHref="#"
-    />
-    <AgentHarnessBar />
-    <ProductSection
-      headline="Manage massive agent teams with confidence"
-      body="Real-time agent health and progressive code reviews that answer how and why. 2-10x your team without losing any context (or sanity)."
-      screenshotName="Lightfield"
-      screenshotAccent="var(--primary)"
       layout="right"
-      ctaText="Learn more about the context control plane"
-      ctaHref="#"
+      badge="Coming in Q2"
     />
     <TraceBar />
 
     <section class="py-24 px-6 bg-muted/20">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Ready to trust your (agent) dev team?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">Ready to trust your (agent) dev team?</h2>
         <p class="text-lg text-muted-foreground mb-8">Join the research preview and start autonomously engineering, responsibly.</p>
-        <a
-          href="#hero-screenshot"
-          class="inline-block text-base font-medium px-8 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+        <ContactButton
+          client:load
+          source="homepage_cta"
+          className="inline-block text-base font-medium px-8 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
         >
           Join Research Preview
-        </a>
+        </ContactButton>
       </div>
     </section>
   </main>

@@ -71,7 +71,7 @@ const allAuthors = [author, ...(coAuthors || [])];
           )}
         </div>
         
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-title mb-6">
           {title}
         </h1>
         
@@ -280,7 +280,7 @@ const allAuthors = [author, ...(coAuthors || [])];
   }
 
   .dark .prose a {
-    color: oklch(0.80 0.16 80);
-    text-decoration-color: oklch(0.80 0.16 80);
+    color: var(--primary);
+    text-decoration-color: var(--primary);
   }
 </style>

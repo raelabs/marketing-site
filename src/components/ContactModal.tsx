@@ -19,9 +19,9 @@ export function ContactModal({ open, onOpenChange, source }: ContactModalProps) 
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Get in touch</DialogTitle>
+          <DialogTitle>Join the Research Preview</DialogTitle>
           <DialogDescription>
-            Tell us about your team and we'll reach out to chat.
+            It's time to trust your (agent) dev team.
           </DialogDescription>
         </DialogHeader>
         <ContactForm

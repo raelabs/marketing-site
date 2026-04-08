@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import ScreenshotPlaceholder from '../../components/ScreenshotPlaceholder.astro';
+import { ContactForm } from '../../components/ContactForm';
+
+const pillars = [
+  {
+    title: 'Know when to dive in',
+    body: "Lightfield watches every agent session constantly so you don't have to. Plan your next task with intention — or go touch grass without guilt.",
+    screenshot: 'Lightfield — Signals',
+    accent: 'var(--primary)',
+    layout: 'left',
+  },
+  {
+    title: 'Triage your team,<br />defrag your day',
+    body: 'Know which agents need you now and what they need you for. Stop whiplashing between terminal windows.',
+    screenshot: 'Lightfield — Triage',
+    accent: 'var(--secondary)',
+    layout: 'right',
+  },
+  {
+    title: 'Context switch in seconds',
+    body: 'Decision traces catch you up instantly on the how and why, not just the diff. Review plans and code in flow without stopping your agents.',
+    screenshot: 'Lightfield — Decision Traces',
+    accent: 'var(--primary)',
+    layout: 'left',
+  },
+  {
+    title: 'Go as deep as the root cause demands',
+    body: 'Design review, SDLC breakdown, or a 3am incident — Lightfield gives you unparalleled replayability when you need to dig.',
+    screenshot: 'Lightfield — Replay',
+    accent: 'var(--secondary)',
+    layout: 'right',
+  },
+];
+---
+
+<BaseLayout
+  title="Lightfield"
+  description="Supervising a team of coding agents is the new full-time job. Lightfield is the control tower that tells you which agent needs you, what it needs, and when you can safely look away."
+>
+  <Nav />
+
+  <main class="pt-24">
+    <!-- Hero -->
+    <section class="py-20 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-title mb-6 text-balance">
+          Accelerate your burn down,<br class="hidden md:inline" /> not your burn out
+        </h1>
+        <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed text-balance">
+          <span class="text-primary font-semibold">Lightfield</span> is the context control plane for ultra-productive agent teams.
+        </p>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="py-20 px-6 border-y border-border bg-muted/20">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-xl md:text-2xl text-foreground leading-relaxed text-balance mb-12">
+          One agent is empowering. A team of them can be demoralizing. Whether you're flickering out by 11am or riding the high past midnight, the cognitive tax is killing productivity (and brain cells).
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-4xl mx-auto">
+          <div>
+            <p class="text-4xl md:text-5xl font-bold text-primary mb-2">39%</p>
+            <p class="text-sm text-muted-foreground leading-snug text-balance">more errors from AI oversight fatigue</p>
+          </div>
+          <div>
+            <p class="text-4xl md:text-5xl font-bold text-primary mb-2">34%</p>
+            <p class="text-sm text-muted-foreground leading-snug">higher intent to quit</p>
+          </div>
+          <div>
+            <p class="text-4xl md:text-5xl font-bold text-primary mb-2">91%</p>
+            <p class="text-sm text-muted-foreground leading-snug">longer PR review times</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pillars -->
+    <div id="pillars">
+      {pillars.map((pillar, i) => (
+        <section class="py-24 px-6">
+          <div class:list={[
+            'max-w-6xl mx-auto flex flex-col gap-12 items-center',
+            pillar.layout === 'left' ? 'md:flex-row' : 'md:flex-row-reverse',
+          ]}>
+            <div class="flex-1 w-full order-1 md:order-none">
+              <ScreenshotPlaceholder name={pillar.screenshot} accentColor={pillar.accent} />
+            </div>
+            <div class="flex-1 md:max-w-md order-2 md:order-none">
+              <p class="text-sm uppercase tracking-wider text-secondary mb-3">0{i + 1}</p>
+              <h2 class="text-3xl md:text-4xl font-bold text-title mb-4" set:html={pillar.title}></h2>
+              <p class="text-lg text-muted-foreground leading-relaxed">{pillar.body}</p>
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Built on rae trace -->
+    <section class="py-16 px-6 border-y border-border">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-2xl md:text-3xl font-bold text-title mb-3">
+          Built on rae trace
+        </h2>
+        <p class="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed text-balance">
+          Every signal, decision trace, and replay is powered by the only real-time decision trace engine for coding agent harnesses. OTel-compliant, cross-harness, open spec.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="join" class="py-24 px-6 bg-muted/20">
+      <div class="max-w-md mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl md:text-4xl font-bold text-title mb-3">
+            Ship faster without flickering out.
+          </h2>
+          <p class="text-lg text-muted-foreground">
+            Join the Lightfield research preview and take back your attention.
+          </p>
+        </div>
+        <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
+          <ContactForm client:load source="lightfield_cta" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

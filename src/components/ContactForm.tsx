@@ -19,7 +19,7 @@ declare global {
   }
 }
 
-export type ContactSource = 'nav' | 'footer' | 'homepage_cta' | 'team_cta' | 'contact_page';
+export type ContactSource = 'nav' | 'footer' | 'homepage_cta' | 'team_cta' | 'contact_page' | 'lightfield_cta';
 
 interface ContactFormProps {
   source: ContactSource;
@@ -98,29 +98,16 @@ function clearPersistedState() {
 }
 
 export function ContactForm({ source, onSuccess, onClose }: ContactFormProps) {
-  // Initialize state from localStorage if available
-  const initialState = React.useMemo(() => {
-    if (typeof window === 'undefined') return null;
-    return loadPersistedState();
-  }, []);
-
-  const [formData, setFormData] = React.useState<FormData>(
-    initialState?.formData ?? {
-      name: '',
-      email: '',
-      role: '',
-      otherAgent: '',
-    }
-  );
-  const [selectedAgents, setSelectedAgents] = React.useState<Set<string>>(
-    new Set(initialState?.selectedAgents ?? [])
-  );
-  const [otherSelected, setOtherSelected] = React.useState(
-    initialState?.otherSelected ?? false
-  );
-  const [optOut, setOptOut] = React.useState<OptOutReason | null>(
-    initialState?.optOut ?? null
-  );
+  const [formData, setFormData] = React.useState<FormData>({
+    name: '',
+    email: '',
+    role: '',
+    otherAgent: '',
+  });
+  const [selectedAgents, setSelectedAgents] = React.useState<Set<string>>(new Set());
+  const [otherSelected, setOtherSelected] = React.useState(false);
+  const [optOut, setOptOut] = React.useState<OptOutReason | null>(null);
+  const [restored, setRestored] = React.useState(false);
   const [errors, setErrors] = React.useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitSuccess, setSubmitSuccess] = React.useState(false);
@@ -128,12 +115,17 @@ export function ContactForm({ source, onSuccess, onClose }: ContactFormProps) {
   const formStartedRef = React.useRef(false);
   const startTimeRef = React.useRef<number>(Date.now());
 
-  // If we restored state, mark form as started
+  // Restore persisted state on client only (avoid SSR hydration mismatch)
   React.useEffect(() => {
-    if (initialState) {
-      formStartedRef.current = true;
-      window.posthog?.capture('contact_form_restored', { source });
-    }
+    const persisted = loadPersistedState();
+    if (!persisted) return;
+    if (persisted.formData) setFormData(persisted.formData);
+    if (persisted.selectedAgents) setSelectedAgents(new Set(persisted.selectedAgents));
+    if (persisted.otherSelected) setOtherSelected(persisted.otherSelected);
+    if (persisted.optOut) setOptOut(persisted.optOut);
+    formStartedRef.current = true;
+    setRestored(true);
+    window.posthog?.capture('contact_form_restored', { source });
   }, []);
 
   // Persist state on changes
@@ -155,7 +147,7 @@ export function ContactForm({ source, onSuccess, onClose }: ContactFormProps) {
     window.posthog?.capture('contact_form_opened', {
       source,
       device: window.innerWidth >= 768 ? 'desktop' : 'mobile',
-      restored: !!initialState,
+      restored,
     });
 
     // Track abandonment on unmount
@@ -394,7 +386,7 @@ export function ContactForm({ source, onSuccess, onClose }: ContactFormProps) {
     return (
       <div className="text-center py-8">
         <div className="text-4xl mb-4">&#10003;</div>
-        <h3 className="text-xl font-semibold mb-2">Thanks for reaching out!</h3>
+        <h3 className="text-xl font-semibold text-title mb-2">Thanks for reaching out!</h3>
         <p className="text-muted-foreground mb-6">
           We'll be in touch soon.
         </p>
@@ -590,7 +582,7 @@ export function ContactForm({ source, onSuccess, onClose }: ContactFormProps) {
       )}
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? 'Sending...' : 'Get in touch'}
+        {isSubmitting ? 'Sending...' : 'Sign Up'}
       </Button>
     </form>
   );

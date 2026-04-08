@@ -12,6 +12,7 @@ interface Props {
   revealDelay?: string;
   ctaText?: string;
   ctaHref?: string;
+  badge?: string;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   revealDelay = '0s',
   ctaText,
   ctaHref = '#',
+  badge,
 } = Astro.props;
 ---
 
@@ -38,10 +40,14 @@ const {
       <ScreenshotPlaceholder name={screenshotName} accentColor={screenshotAccent} />
     </div>
     <div class="flex-1 md:max-w-md order-2 md:order-none">
-      <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{headline}</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">{headline}</h2>
       <p class="text-lg text-muted-foreground leading-relaxed">{body}</p>
-      {ctaText && (
-        <a href={ctaHref} class="inline-block mt-8 text-lg text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors">
+      {badge ? (
+        <span class="inline-block mt-8 text-sm font-medium px-3 py-1.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30">
+          {badge}
+        </span>
+      ) : ctaText && (
+        <a href={ctaHref} class="inline-block mt-8 text-lg text-primary underline underline-offset-4 hover:opacity-80 transition-opacity">
           {ctaText} →
         </a>
       )}

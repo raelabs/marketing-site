@@ -8,11 +8,25 @@ interface Props {
 const { name, accentColor = 'var(--primary)', class: className = '' } = Astro.props;
 ---
 
-<div class:list={['screenshot-placeholder rounded-xl', className]}>
+<div class:list={['screenshot-placeholder rounded-xl', className]} style={`--accent: ${accentColor};`}>
   <div
-    class="w-full aspect-video flex items-center justify-center rounded-xl"
-    style={`background: linear-gradient(135deg, oklch(0.22 0.03 285), oklch(0.18 0.04 285)); box-shadow: 0 0 60px color-mix(in oklch, ${accentColor} 25%, transparent), 0 0 120px color-mix(in oklch, ${accentColor} 10%, transparent); mask-image: linear-gradient(to bottom, black 60%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);`}
+    class="placeholder-inner w-full aspect-video flex items-center justify-center rounded-xl"
   >
     <span class="text-sm text-muted-foreground opacity-50">{name} Screenshot</span>
   </div>
 </div>
+
+<style>
+  .screenshot-placeholder .placeholder-inner {
+    background: linear-gradient(135deg, oklch(0.32 0.03 60), oklch(0.26 0.04 60));
+    box-shadow:
+      0 0 60px color-mix(in oklch, var(--accent) 25%, transparent),
+      0 0 120px color-mix(in oklch, var(--accent) 10%, transparent);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  :global(.dark) .screenshot-placeholder .placeholder-inner {
+    background: linear-gradient(135deg, oklch(0.22 0.03 285), oklch(0.18 0.04 285));
+  }
+</style>
