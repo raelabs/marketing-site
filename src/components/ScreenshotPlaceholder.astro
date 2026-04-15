@@ -3,30 +3,67 @@ interface Props {
   name: string;
   accentColor?: string;
   class?: string;
+  imageDark?: string;
+  imageLight?: string;
 }
 
-const { name, accentColor = 'var(--primary)', class: className = '' } = Astro.props;
+const { name, accentColor = 'var(--primary)', class: className = '', imageDark, imageLight } = Astro.props;
+const hasImage = imageDark && imageLight;
 ---
 
 <div class:list={['screenshot-placeholder rounded-xl', className]} style={`--accent: ${accentColor};`}>
+  <div class="screenshot-shadow rounded-xl aspect-video" aria-hidden="true"></div>
   <div
-    class="placeholder-inner w-full aspect-video flex items-center justify-center rounded-xl"
+    class="placeholder-inner w-full aspect-video flex items-center justify-center rounded-xl overflow-hidden"
   >
-    <span class="text-sm text-muted-foreground opacity-50">{name} Screenshot</span>
+    {hasImage ? (
+      <>
+        <img src={imageDark} alt={`${name} screenshot`} class="screenshot-img screenshot-dark w-full h-full object-cover object-top" loading="lazy" />
+        <img src={imageLight} alt={`${name} screenshot`} class="screenshot-img screenshot-light w-full h-full object-cover object-top" loading="lazy" />
+      </>
+    ) : (
+      <span class="text-sm text-muted-foreground opacity-50">{name} Screenshot</span>
+    )}
   </div>
 </div>
 
 <style>
+  .screenshot-placeholder {
+    position: relative;
+  }
+
+  .screenshot-shadow {
+    position: absolute;
+    inset: -3px;
+    z-index: 0;
+    border-radius: inherit;
+    background: linear-gradient(to bottom, color-mix(in oklch, var(--primary) 50%, transparent) 0%, transparent 80%);
+    filter: blur(3px);
+    pointer-events: none;
+  }
+
   .screenshot-placeholder .placeholder-inner {
+    position: relative;
+    z-index: 1;
     background: linear-gradient(135deg, oklch(0.32 0.03 60), oklch(0.26 0.04 60));
-    box-shadow:
-      0 0 60px color-mix(in oklch, var(--accent) 25%, transparent),
-      0 0 120px color-mix(in oklch, var(--accent) 10%, transparent);
     mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   }
 
   :global(.dark) .screenshot-placeholder .placeholder-inner {
     background: linear-gradient(135deg, oklch(0.22 0.03 285), oklch(0.18 0.04 285));
+  }
+
+  .screenshot-dark {
+    display: none;
+  }
+  .screenshot-light {
+    display: block;
+  }
+  :global(.dark) .screenshot-dark {
+    display: block;
+  }
+  :global(.dark) .screenshot-light {
+    display: none;
   }
 </style>

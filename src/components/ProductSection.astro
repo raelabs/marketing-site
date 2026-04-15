@@ -6,6 +6,8 @@ interface Props {
   body: string;
   screenshotName: string;
   screenshotAccent?: string;
+  screenshotDark?: string;
+  screenshotLight?: string;
   layout?: 'left' | 'right';
   id?: string;
   reveal?: boolean;
@@ -20,6 +22,8 @@ const {
   body,
   screenshotName,
   screenshotAccent = 'var(--primary)',
+  screenshotDark,
+  screenshotLight,
   layout = 'left',
   id,
   reveal = false,
@@ -37,7 +41,7 @@ const {
     'items-center'
   ]}>
     <div class="flex-1 w-full order-1 md:order-none">
-      <ScreenshotPlaceholder name={screenshotName} accentColor={screenshotAccent} />
+      <ScreenshotPlaceholder name={screenshotName} accentColor={screenshotAccent} imageDark={screenshotDark} imageLight={screenshotLight} />
     </div>
     <div class="flex-1 md:max-w-md order-2 md:order-none">
       <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">{headline}</h2>

@@ -12,6 +12,8 @@ const pillars = [
     screenshot: 'Lightfield — Signals',
     accent: 'var(--primary)',
     layout: 'left',
+    imageDark: '/images/screenshots/session-traces-focused-dark.png',
+    imageLight: '/images/screenshots/session-traces-focused-light.png',
   },
   {
     title: 'Triage your team,<br />defrag your day',
@@ -19,6 +21,8 @@ const pillars = [
     screenshot: 'Lightfield — Triage',
     accent: 'var(--secondary)',
     layout: 'right',
+    imageDark: '/images/screenshots/agent-field-dark.png',
+    imageLight: '/images/screenshots/agent-field-light.png',
   },
   {
     title: 'Context switch in seconds',
@@ -26,6 +30,8 @@ const pillars = [
     screenshot: 'Lightfield — Decision Traces',
     accent: 'var(--primary)',
     layout: 'left',
+    imageDark: '/images/screenshots/code-review-dark.png',
+    imageLight: '/images/screenshots/code-review-light.png',
   },
   {
     title: 'Go as deep as the root cause demands',
@@ -33,6 +39,8 @@ const pillars = [
     screenshot: 'Lightfield — Replay',
     accent: 'var(--secondary)',
     layout: 'right',
+    imageDark: '/images/screenshots/session-traces-expanded-dark.png',
+    imageLight: '/images/screenshots/session-traces-expanded-light.png',
   },
 ];
 ---
@@ -79,6 +87,16 @@ const pillars = [
       </div>
     </section>
 
+    <!-- Solution bridge -->
+    <section class="pt-24 pb-8 px-6">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-sm uppercase tracking-wider text-secondary mb-4">How Lightfield works</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-title text-balance leading-tight">
+          Manage dozens of agents confidently<br />and cut context switching fatigue in half
+        </h2>
+      </div>
+    </section>
+
     <!-- Pillars -->
     <div id="pillars">
       {pillars.map((pillar, i) => (
@@ -88,7 +106,7 @@ const pillars = [
             pillar.layout === 'left' ? 'md:flex-row' : 'md:flex-row-reverse',
           ]}>
             <div class="flex-1 w-full order-1 md:order-none">
-              <ScreenshotPlaceholder name={pillar.screenshot} accentColor={pillar.accent} />
+              <ScreenshotPlaceholder name={pillar.screenshot} accentColor={pillar.accent} imageDark={pillar.imageDark} imageLight={pillar.imageLight} />
             </div>
             <div class="flex-1 md:max-w-md order-2 md:order-none">
               <p class="text-sm uppercase tracking-wider text-secondary mb-3">0{i + 1}</p>
