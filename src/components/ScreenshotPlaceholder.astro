@@ -5,9 +5,10 @@ interface Props {
   class?: string;
   imageDark?: string;
   imageLight?: string;
+  objectPosition?: string;
 }
 
-const { name, accentColor = 'var(--primary)', class: className = '', imageDark, imageLight } = Astro.props;
+const { name, accentColor = 'var(--primary)', class: className = '', imageDark, imageLight, objectPosition = 'top' } = Astro.props;
 const hasImage = imageDark && imageLight;
 ---
 
@@ -18,8 +19,8 @@ const hasImage = imageDark && imageLight;
   >
     {hasImage ? (
       <>
-        <img src={imageDark} alt={`${name} screenshot`} class="screenshot-img screenshot-dark w-full h-full object-cover object-top" loading="lazy" />
-        <img src={imageLight} alt={`${name} screenshot`} class="screenshot-img screenshot-light w-full h-full object-cover object-top" loading="lazy" />
+        <img src={imageDark} alt={`${name} screenshot`} class="screenshot-img screenshot-dark w-full h-full object-cover" style={`object-position: ${objectPosition};`} loading="lazy" />
+        <img src={imageLight} alt={`${name} screenshot`} class="screenshot-img screenshot-light w-full h-full object-cover" style={`object-position: ${objectPosition};`} loading="lazy" />
       </>
     ) : (
       <span class="text-sm text-muted-foreground opacity-50">{name} Screenshot</span>

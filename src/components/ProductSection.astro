@@ -8,13 +8,15 @@ interface Props {
   screenshotAccent?: string;
   screenshotDark?: string;
   screenshotLight?: string;
-  layout?: 'left' | 'right';
+  screenshotPosition?: string;
+  layout?: 'left' | 'right' | 'center';
   id?: string;
   reveal?: boolean;
   revealDelay?: string;
   ctaText?: string;
   ctaHref?: string;
   badge?: string;
+  badgePrefix?: string;
 }
 
 const {
@@ -24,6 +26,7 @@ const {
   screenshotAccent = 'var(--primary)',
   screenshotDark,
   screenshotLight,
+  screenshotPosition,
   layout = 'left',
   id,
   reveal = false,
@@ -31,24 +34,18 @@ const {
   ctaText,
   ctaHref = '#',
   badge,
+  badgePrefix,
 } = Astro.props;
 ---
 
 <section id={id} class:list={['py-24 px-6', reveal && 'hero-reveal']} style={reveal ? `animation-delay: ${revealDelay};` : undefined}>
-  <div class:list={[
-    'max-w-6xl mx-auto flex flex-col gap-12',
-    layout === 'left' ? 'md:flex-row' : 'md:flex-row-reverse',
-    'items-center'
-  ]}>
-    <div class="flex-1 w-full order-1 md:order-none">
-      <ScreenshotPlaceholder name={screenshotName} accentColor={screenshotAccent} imageDark={screenshotDark} imageLight={screenshotLight} />
-    </div>
-    <div class="flex-1 md:max-w-md order-2 md:order-none">
+  {layout === 'center' ? (
+    <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">{headline}</h2>
       <p class="text-lg text-muted-foreground leading-relaxed">{body}</p>
       {badge ? (
         <span class="inline-block mt-8 text-sm font-medium px-3 py-1.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30">
-          {badge}
+          {badgePrefix ? <><strong class="font-extrabold">{badgePrefix}</strong> {badge}</> : badge}
         </span>
       ) : ctaText && (
         <a href={ctaHref} class="inline-block mt-8 text-lg text-primary underline underline-offset-4 hover:opacity-80 transition-opacity">
@@ -56,5 +53,28 @@ const {
         </a>
       )}
     </div>
-  </div>
+  ) : (
+    <div class:list={[
+      'max-w-6xl mx-auto flex flex-col gap-12',
+      layout === 'left' ? 'md:flex-row' : 'md:flex-row-reverse',
+      'items-center'
+    ]}>
+      <div class="flex-1 w-full order-1 md:order-none">
+        <ScreenshotPlaceholder name={screenshotName} accentColor={screenshotAccent} imageDark={screenshotDark} imageLight={screenshotLight} objectPosition={screenshotPosition} />
+      </div>
+      <div class="flex-1 md:max-w-md order-2 md:order-none">
+        <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">{headline}</h2>
+        <p class="text-lg text-muted-foreground leading-relaxed">{body}</p>
+        {badge ? (
+          <span class="inline-block mt-8 text-sm font-medium px-3 py-1.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30">
+            {badgePrefix ? <><strong class="font-extrabold">{badgePrefix}</strong> {badge}</> : badge}
+          </span>
+        ) : ctaText && (
+          <a href={ctaHref} class="inline-block mt-8 text-lg text-primary underline underline-offset-4 hover:opacity-80 transition-opacity">
+            {ctaText} →
+          </a>
+        )}
+      </div>
+    </div>
+  )}
 </section>
