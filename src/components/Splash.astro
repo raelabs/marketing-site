@@ -1,29 +1,25 @@
 ---
 /**
  * Landing splash overlay — plays once per visitor.
- * Pure CSS keyframe animations, localStorage to prevent repeat.
+ * Pure CSS keyframe animations; localStorage to prevent repeat.
  *
  * Timing (ms):
  *   0.3s  – Phase 1 entrance (1.1s)
  *   1.5s  – Phase 2 entrance (1.1s)
- *   2.8s  – Phase 3 entrance (1.1s)
- *   3.9s  – All phases fully visible
- *   6.0s  – Exit begins (1.1s), hero entrance starts
- *   7.3s  – Overlay removed
+ *   2.6s  – All phases fully visible
+ *   4.8s  – Exit begins (1.1s), hero entrance starts
+ *   6.1s  – Overlay removed
  */
 ---
 
 <div id="splash-overlay" class="splash-overlay">
   <div class="splash-content">
     <div class="splash-group splash-phase-1">
-      <p class="splash-large">hey engineers and execs</p>
-    </div>
-    <div class="splash-group splash-phase-2">
       <p class="splash-small">the age of</p>
       <p class="splash-large">autonomous engineering</p>
       <p class="splash-small">has arrived</p>
     </div>
-    <div class="splash-group splash-phase-3">
+    <div class="splash-group splash-phase-2">
       <p class="splash-small">it&apos;s time to</p>
       <p class="splash-large">trust your (agent) dev team</p>
     </div>
@@ -50,12 +46,12 @@
       // Unblock hero entrance animations as splash starts to leave
       document.documentElement.classList.add('splash-done');
       localStorage.setItem('rae-splash-seen', '1');
-    }, 6000);
+    }, 4800);
 
     // Remove overlay after exit animation completes
     setTimeout(function() {
       overlay.remove();
-    }, 7300);
+    }, 6100);
   })();
 </script>
 
@@ -90,10 +86,6 @@
     animation: splashIn 1.1s ease-out 1.5s forwards;
   }
 
-  .splash-active .splash-phase-3 {
-    animation: splashIn 1.1s ease-out 2.8s forwards;
-  }
-
   @keyframes splashIn {
     0% {
       opacity: 0;
@@ -118,17 +110,13 @@
     animation: splashOut 1.1s ease-in forwards !important;
   }
 
-  /* Stagger exit in reverse — phase 1 exits first, phase 3 last */
+  /* Stagger exit in reverse — phase 1 exits first, phase 2 last */
   .splash-overlay.splash-exit .splash-phase-1 {
     animation-delay: 0s !important;
   }
 
   .splash-overlay.splash-exit .splash-phase-2 {
     animation-delay: 0.1s !important;
-  }
-
-  .splash-overlay.splash-exit .splash-phase-3 {
-    animation-delay: 0.2s !important;
   }
 
   @keyframes splashOut {
@@ -192,8 +180,7 @@
       transform: none;
     }
     .splash-active .splash-phase-1,
-    .splash-active .splash-phase-2,
-    .splash-active .splash-phase-3 {
+    .splash-active .splash-phase-2 {
       animation: none;
       opacity: 1;
     }
