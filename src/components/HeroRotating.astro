@@ -1,0 +1,181 @@
+---
+import ScreenshotPlaceholder from './ScreenshotPlaceholder.astro';
+
+const prefixes = [
+  'Software',
+  'Backend',
+  'UI/UX',
+  'Data',
+  'Native app',
+  'Platform',
+  'Infra',
+];
+---
+
+<section class="pt-32 pb-16 px-6">
+  <div class="max-w-6xl mx-auto">
+    <h1 class="hero-reveal text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-title mb-6 leading-[1.15]" style="animation-delay: 0.2s;">
+      <span class="block">The trust harness for autonomous</span>
+      <span class="hero-rotating-line">
+        <span class="hero-rotating-wrapper" id="hero-rotating-wrapper">
+          {prefixes.map((prefix, i) => (
+            <span
+              class="hero-rotating-item"
+              data-index={i}
+              aria-hidden={i > 0 ? 'true' : undefined}
+            >{prefix}</span>
+          ))}
+        </span>
+        <span class="hero-engineering">engineering</span>
+      </span>
+    </h1>
+
+    <p class="hero-reveal text-lg md:text-xl text-muted-foreground max-w-2xl mb-16" style="animation-delay: 0.5s;">
+      Architected for ultra-productive (agent) dev teams
+    </p>
+
+    <div id="hero-screenshot" class="hero-reveal max-w-5xl" style="animation-delay: 0.8s;">
+      <ScreenshotPlaceholder
+        name="Lightfield"
+        accentColor="var(--primary)"
+        imageDark="/images/screenshots/agent-field-dark.png"
+        imageLight="/images/screenshots/agent-field-light.png"
+      />
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var wrapper = document.getElementById('hero-rotating-wrapper');
+    if (!wrapper) return;
+
+    var items = wrapper.querySelectorAll('.hero-rotating-item');
+    var engineering = wrapper.parentElement.querySelector('.hero-engineering');
+    var count = items.length;
+    var interval = 3500;
+    var current = 0;
+    var widths = [];
+
+    function measure() {
+      widths = [];
+      for (var i = 0; i < count; i++) {
+        items[i].style.visibility = 'hidden';
+        items[i].style.opacity = '1';
+        items[i].style.position = 'relative';
+        widths.push(items[i].offsetWidth);
+        items[i].style.position = '';
+        items[i].style.visibility = '';
+        items[i].style.opacity = '';
+      }
+      wrapper.style.width = widths[current] + 'px';
+
+      // Check if the widest rotating word + "engineering" would overflow the container.
+      // If so, put "engineering" on its own line permanently.
+      var container = wrapper.closest('.max-w-6xl');
+      var containerWidth = container ? container.clientWidth - 48 : Infinity; // subtract px-6 padding
+      var engineeringWidth = engineering.offsetWidth;
+      var wrapperMargin = parseFloat(getComputedStyle(wrapper).marginRight) || 0;
+      var maxPrefixWidth = Math.max.apply(null, widths) + wrapperMargin;
+
+      if (maxPrefixWidth + engineeringWidth > containerWidth) {
+        engineering.style.display = 'block';
+      } else {
+        engineering.style.display = '';
+      }
+    }
+
+    measure();
+    items[0].classList.add('hero-rotating-active');
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(measure, 150);
+    });
+
+    function next() {
+      var prev = current;
+      current = (current + 1) % count;
+
+      items[prev].classList.remove('hero-rotating-active');
+      items[prev].classList.add('hero-rotating-exit');
+
+      wrapper.style.width = widths[current] + 'px';
+
+      items[current].classList.add('hero-rotating-active');
+
+      setTimeout(function () {
+        items[prev].classList.remove('hero-rotating-exit');
+      }, 600);
+    }
+
+    // Wait for splash to finish before starting the rotation
+    function startRotation() {
+      setInterval(next, interval);
+    }
+
+    if (document.documentElement.classList.contains('splash-done')) {
+      startRotation();
+    } else {
+      var observer = new MutationObserver(function (mutations) {
+        if (document.documentElement.classList.contains('splash-done')) {
+          observer.disconnect();
+          startRotation();
+        }
+      });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    }
+  })();
+</script>
+
+<style>
+  .hero-rotating-wrapper {
+    display: inline-block;
+    position: relative;
+    height: 1.15em;
+    vertical-align: bottom;
+    margin-right: 0.3em;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hero-engineering {
+  }
+
+  .hero-rotating-item {
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(0.12em);
+    transition:
+      opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hero-rotating-item.hero-rotating-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-rotating-item.hero-rotating-exit {
+    opacity: 0;
+    transform: translateY(-0.12em);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rotating-wrapper {
+      transition: none;
+    }
+    .hero-rotating-item {
+      transition: none;
+    }
+    .hero-rotating-item:first-child {
+      opacity: 1;
+      position: relative;
+      transform: none;
+    }
+  }
+</style>

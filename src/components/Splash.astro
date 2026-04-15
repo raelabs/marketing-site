@@ -1,0 +1,209 @@
+---
+/**
+ * Landing splash overlay — plays once per visitor.
+ * Pure CSS keyframe animations, localStorage to prevent repeat.
+ *
+ * Timing (ms):
+ *   0.3s  – Phase 1 entrance (1.1s)
+ *   1.5s  – Phase 2 entrance (1.1s)
+ *   2.8s  – Phase 3 entrance (1.1s)
+ *   3.9s  – All phases fully visible
+ *   6.0s  – Exit begins (1.1s), hero entrance starts
+ *   7.3s  – Overlay removed
+ */
+---
+
+<div id="splash-overlay" class="splash-overlay">
+  <div class="splash-content">
+    <div class="splash-group splash-phase-1">
+      <p class="splash-large">hey engineers and execs</p>
+    </div>
+    <div class="splash-group splash-phase-2">
+      <p class="splash-small">the age of</p>
+      <p class="splash-large">autonomous engineering</p>
+      <p class="splash-small">has arrived</p>
+    </div>
+    <div class="splash-group splash-phase-3">
+      <p class="splash-small">it&apos;s time to</p>
+      <p class="splash-large">trust your (agent) dev team</p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function() {
+    var overlay = document.getElementById('splash-overlay');
+    if (!overlay) return;
+
+    if (localStorage.getItem('rae-splash-seen')) {
+      overlay.remove();
+      // Hero animations play immediately when splash is skipped
+      document.documentElement.classList.add('splash-done');
+      return;
+    }
+
+    overlay.classList.add('splash-active');
+
+    // Start exit animation — timed so hero entrance chases the splash away
+    setTimeout(function() {
+      overlay.classList.add('splash-exit');
+      // Unblock hero entrance animations as splash starts to leave
+      document.documentElement.classList.add('splash-done');
+      localStorage.setItem('rae-splash-seen', '1');
+    }, 6000);
+
+    // Remove overlay after exit animation completes
+    setTimeout(function() {
+      overlay.remove();
+    }, 7300);
+  })();
+</script>
+
+<style>
+  .splash-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: oklch(0.15 0.04 285);
+  }
+
+  .splash-overlay.splash-active {
+    display: flex;
+  }
+
+  /* --- Entrance: blur-focus + rise + fade in (mirrors hero) --- */
+
+  .splash-group {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(12px);
+  }
+
+  .splash-active .splash-phase-1 {
+    animation: splashIn 1.1s ease-out 0.3s forwards;
+  }
+
+  .splash-active .splash-phase-2 {
+    animation: splashIn 1.1s ease-out 1.5s forwards;
+  }
+
+  .splash-active .splash-phase-3 {
+    animation: splashIn 1.1s ease-out 2.8s forwards;
+  }
+
+  @keyframes splashIn {
+    0% {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+
+  /* --- Exit: sink + blur + fade out (mirror of entrance) --- */
+
+  /* Lock in the "fully visible" base state so there's no flash when
+     swapping from the entrance animation to the exit animation. */
+  .splash-overlay.splash-exit .splash-group {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+    animation: splashOut 1.1s ease-in forwards !important;
+  }
+
+  /* Stagger exit in reverse — phase 1 exits first, phase 3 last */
+  .splash-overlay.splash-exit .splash-phase-1 {
+    animation-delay: 0s !important;
+  }
+
+  .splash-overlay.splash-exit .splash-phase-2 {
+    animation-delay: 0.1s !important;
+  }
+
+  .splash-overlay.splash-exit .splash-phase-3 {
+    animation-delay: 0.2s !important;
+  }
+
+  @keyframes splashOut {
+    0% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(12px);
+    }
+  }
+
+  /* Fade the overlay background itself — starts slightly after content exits */
+  .splash-overlay.splash-exit {
+    animation: splashBgOut 0.8s ease-in 0.3s forwards;
+  }
+
+  @keyframes splashBgOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; pointer-events: none; }
+  }
+
+  /* --- Layout --- */
+
+  .splash-content {
+    text-align: center;
+    padding: 1.5rem;
+    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .splash-large {
+    font-size: clamp(1.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+
+  .splash-small {
+    font-size: clamp(0.875rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    color: var(--primary-subdued);
+    line-height: 1.4;
+  }
+
+  :global(body:has(.splash-active)) {
+    overflow: hidden;
+  }
+
+  /* --- Reduced motion --- */
+
+  @media (prefers-reduced-motion: reduce) {
+    .splash-group {
+      opacity: 1;
+      filter: none;
+      transform: none;
+    }
+    .splash-active .splash-phase-1,
+    .splash-active .splash-phase-2,
+    .splash-active .splash-phase-3 {
+      animation: none;
+      opacity: 1;
+    }
+    .splash-overlay.splash-exit .splash-group {
+      animation: none !important;
+      opacity: 0;
+    }
+    .splash-overlay.splash-exit {
+      animation: none;
+      display: none;
+    }
+  }
+</style>

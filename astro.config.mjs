@@ -7,8 +7,15 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
+// On Cloudflare Pages preview builds, use the unique deploy URL so OG/canonical
+// tags self-reference instead of pointing at production rae.partners.
+const isProdBranch = process.env.CF_PAGES_BRANCH === 'main';
+const site = !isProdBranch && process.env.CF_PAGES_URL
+  ? process.env.CF_PAGES_URL
+  : 'https://rae.partners';
+
 export default defineConfig({
-  site: 'https://rae.partners',
+  site,
   output: 'static',
 
   vite: {

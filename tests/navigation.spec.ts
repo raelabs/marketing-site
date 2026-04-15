@@ -35,9 +35,9 @@ test.describe('Navigation Tests', () => {
   test('CTA buttons are present', async ({ page }) => {
     await page.goto('/');
 
-    // Check contact buttons (now React components, not mailto links)
-    const contactButtons = page.locator('button:has-text("Contact"), button:has-text("Get in touch")');
-    expect(await contactButtons.count()).toBeGreaterThan(0);
+    // Check Research Preview CTA link in nav
+    const researchPreviewCTA = page.locator('button:has-text("Join Research Preview"), a:has-text("Join Research Preview")');
+    expect(await researchPreviewCTA.count()).toBeGreaterThan(0);
   });
 
   test('blog post back navigation works', async ({ page }) => {

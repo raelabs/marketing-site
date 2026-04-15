@@ -3,6 +3,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ── RAE Design Tokens ──────────────────────────────────────────────────────
+ * Three-layer token architecture:
+ *   1. BRAND tokens — from Rae Brand Colors, usage-agnostic
+ *   2. SEMANTIC tokens — derived from brand tokens (or custom)
+ *   3. LEGACY tokens — kept for backward compatibility with shadcn defaults
+ * Source of truth: raelabs/rae-monorepo apps/lightfield-local/app/styles/input.css
+ * ──────────────────────────────────────────────────────────────────────────── */
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -11,29 +19,63 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+
+  /* ── Brand color tokens ── */
   --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-subdued: var(--primary-subdued);
   --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary-subdued: var(--secondary-subdued);
   --color-accent: var(--accent);
+  --color-accent-subdued: var(--accent-subdued);
+  --color-neutral: var(--neutral);
+  --color-neutral-subdued: var(--neutral-subdued);
+  --color-neutral-vivid: var(--neutral-vivid);
+  --color-actor-parent: var(--actor-parent);
+  --color-background: var(--background);
+
+  /* ── Accessible variants (WCAG AA vs background) ── */
+  --color-primary-accessible: var(--primary-accessible);
+  --color-secondary-accessible: var(--secondary-accessible);
+
+  /* ── Semantic text tokens (derived from brand neutrals) ── */
+  --color-title: var(--neutral-vivid);
+  --color-subtitle: var(--neutral-vivid);
+  --color-body: var(--neutral);
+  --color-subtext: var(--neutral-subdued);
+
+  /* ── Semantic surface tokens ── */
+  --color-card: var(--card);
+  --color-popover: var(--popover);
+  --color-muted: var(--muted);
+  --color-hover: var(--hover);
+
+  /* ── Semantic "text on surface" tokens ── */
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-accent-foreground: var(--accent-foreground);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* ── Semantic UI tokens ── */
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  /* ── Data visualization ── */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
+  /* ── Gradients ── */
+  --gradient-primary: var(--gradient-primary);
+  --gradient-secondary: var(--gradient-secondary);
+
+  /* ── Legacy (kept for shadcn defaults) ── */
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -42,136 +84,137 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
-  /* Sunrise palette - for hero and illustrations */
-  --color-sunrise-horizon: var(--sunrise-horizon);
-  --color-sunrise-corona: var(--sunrise-corona);
-  --color-sunrise-sky-mid: var(--sunrise-sky-mid);
-  --color-sunrise-sky-upper: var(--sunrise-sky-upper);
-  --color-sunrise-hills-near: var(--sunrise-hills-near);
-  --color-sunrise-hills-far: var(--sunrise-hills-far);
-  --color-sunrise-silhouette: var(--sunrise-silhouette);
 }
 
-/* Solarpunk Theme - RAE Partners */
-/* Accessibility-compliant colors (WCAG AA contrast ratios) */
+/* ── Light Mode ────────────────────────────────────────────────────────────── */
 :root {
   --radius: 0.625rem;
-  
-  /* Warm white background with subtle cream warmth */
-  --background: oklch(0.985 0.008 85);
-  --foreground: oklch(0.25 0.02 50);
-  
-  /* Cards slightly warmer than background */
-  --card: oklch(0.99 0.005 85);
-  --card-foreground: oklch(0.25 0.02 50);
-  
-  --popover: oklch(0.99 0.005 85);
-  --popover-foreground: oklch(0.25 0.02 50);
-  
-  /* Primary: Deep solar gold (darkened for 4.5:1 contrast on white) */
-  /* Original was 0.75, darkened to 0.55 for accessibility */
-  --primary: oklch(0.55 0.16 75);
-  --primary-foreground: oklch(0.98 0.005 85);
-  
-  /* Secondary: Muted earth tones */
-  --secondary: oklch(0.94 0.015 85);
-  --secondary-foreground: oklch(0.3 0.02 50);
-  
-  --muted: oklch(0.94 0.01 85);
-  --muted-foreground: oklch(0.45 0.02 50);
-  
-  /* Accent: Verdant green (darkened for accessibility) */
-  --accent: oklch(0.5 0.12 160);
-  --accent-foreground: oklch(0.98 0.005 85);
-  
-  --destructive: oklch(0.5 0.18 25);
-  
-  /* Borders and inputs - warm subtle */
-  --border: oklch(0.88 0.015 85);
-  --input: oklch(0.92 0.01 85);
-  --ring: oklch(0.55 0.16 75);
-  
-  /* Chart colors - solarpunk palette */
-  --chart-1: oklch(0.55 0.16 75);   /* Solar gold */
-  --chart-2: oklch(0.5 0.12 160);   /* Verdant green */
-  --chart-3: oklch(0.5 0.1 200);    /* Sky blue */
-  --chart-4: oklch(0.55 0.12 40);   /* Terra cotta */
-  --chart-5: oklch(0.55 0.08 280);  /* Lavender */
-  
-  /* Sidebar - same warm palette */
-  --sidebar: oklch(0.98 0.008 85);
-  --sidebar-foreground: oklch(0.25 0.02 50);
-  --sidebar-primary: oklch(0.55 0.16 75);
-  --sidebar-primary-foreground: oklch(0.98 0.005 85);
-  --sidebar-accent: oklch(0.94 0.015 85);
-  --sidebar-accent-foreground: oklch(0.3 0.02 50);
-  --sidebar-border: oklch(0.88 0.015 85);
-  --sidebar-ring: oklch(0.55 0.16 75);
 
-  /* Sunrise palette - for hero illustration */
-  --sunrise-horizon: oklch(0.80 0.18 80);    /* Rich warm gold */
-  --sunrise-corona: oklch(0.70 0.20 75);     /* Saturated solar gold */
-  --sunrise-sky-mid: oklch(0.75 0.12 280);   /* Visible lavender */
-  --sunrise-sky-upper: oklch(0.85 0.08 220); /* Clear sky blue */
-  --sunrise-hills-near: oklch(0.60 0.10 160);/* Verdant green */
-  --sunrise-hills-far: oklch(0.70 0.08 160); /* Lighter green */
-  --sunrise-silhouette: oklch(0.35 0.08 160);/* Dark green depth */
+  /* Brand colors — from Rae Brand Colors */
+  --primary: oklch(0.82 0.17 80);            /* #FFBC35 Rae Yellow */
+  --primary-subdued: oklch(0.96 0.04 90);    /* #FFEECC */
+  --secondary: oklch(0.74 0.14 120);         /* #A5BE41 Human Green */
+  --secondary-subdued: oklch(0.87 0.10 120); /* #E6E9D8 */
+  --accent: oklch(0.65 0.16 15);             /* #F4767A Data Coral */
+  --accent-subdued: oklch(0.93 0.03 15);     /* #FEDCDD */
+  --actor-parent: oklch(0.72 0.16 55);       /* Warm amber */
+  --neutral: oklch(0.45 0.04 60);            /* Warm brown */
+  --neutral-subdued: oklch(0.77 0.05 70);    /* #C9AF8F Text Subdued */
+  --neutral-vivid: oklch(0.18 0.04 290);     /* #140C27 (inverse of background) */
+  --background: oklch(0.99 0.005 85);        /* #FEFDFB Page Background */
+
+  /* Semantic surface tokens */
+  --card: oklch(0.97 0.01 80);
+  --popover: oklch(0.99 0.005 85);
+  --muted: oklch(0.95 0.02 75);
+  --hover: oklch(0.94 0.01 85);
+
+  /* Semantic "text on surface" tokens */
+  --primary-foreground: oklch(0.20 0.00 0);
+  --secondary-foreground: oklch(0.20 0.00 0);
+  --accent-foreground: oklch(0.99 0.005 85);
+  --card-foreground: oklch(0.30 0.00 0);
+  --popover-foreground: oklch(0.30 0.00 0);
+
+  /* Accessible text variants (WCAG AA 4.5:1 vs background) */
+  --primary-accessible: oklch(0.52 0.12 75);
+  --secondary-accessible: oklch(0.48 0.10 120);
+
+  /* Semantic UI tokens */
+  --destructive: oklch(0.50 0.18 25);
+  --border: oklch(0.90 0.02 85);
+  --input: oklch(0.92 0.01 85);
+  --ring: oklch(0.82 0.17 80);
+
+  /* Data visualization */
+  --chart-1: oklch(0.82 0.17 80);
+  --chart-2: oklch(0.74 0.14 120);
+  --chart-3: oklch(0.65 0.16 15);
+  --chart-4: oklch(0.55 0.12 40);
+  --chart-5: oklch(0.55 0.08 280);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(to right, var(--primary-subdued), var(--primary));
+  --gradient-secondary: linear-gradient(to right, var(--secondary-subdued), var(--secondary));
+
+  /* Legacy (kept for shadcn defaults) */
+  --foreground: oklch(0.30 0.00 0);
+  --muted-foreground: var(--neutral-subdued);
+
+  --sidebar: oklch(0.99 0.005 85);
+  --sidebar-foreground: oklch(0.30 0.00 0);
+  --sidebar-primary: oklch(0.82 0.17 80);
+  --sidebar-primary-foreground: oklch(0.20 0.00 0);
+  --sidebar-accent: oklch(0.92 0.03 115);
+  --sidebar-accent-foreground: oklch(0.30 0.00 0);
+  --sidebar-border: oklch(0.90 0.02 85);
+  --sidebar-ring: oklch(0.82 0.17 80);
 }
 
+/* ── Dark Mode ─────────────────────────────────────────────────────────────── */
 .dark {
-  --background: oklch(0.18 0.015 50);
-  --foreground: oklch(0.95 0.008 85);
-  
-  --card: oklch(0.22 0.015 50);
-  --card-foreground: oklch(0.95 0.008 85);
-  
-  --popover: oklch(0.22 0.015 50);
-  --popover-foreground: oklch(0.95 0.008 85);
-  
-  /* Primary: Solar gold (brighter in dark mode for contrast) */
-  --primary: oklch(0.75 0.18 80);
-  --primary-foreground: oklch(0.15 0.02 50);
-  
-  --secondary: oklch(0.28 0.015 50);
-  --secondary-foreground: oklch(0.95 0.008 85);
-  
-  --muted: oklch(0.28 0.015 50);
-  --muted-foreground: oklch(0.65 0.015 50);
-  
-  /* Accent: Verdant green */
-  --accent: oklch(0.65 0.18 160);
-  --accent-foreground: oklch(0.98 0.005 85);
-  
-  --destructive: oklch(0.65 0.22 25);
-  
-  --border: oklch(0.32 0.015 50);
-  --input: oklch(0.28 0.015 50);
-  --ring: oklch(0.75 0.18 80);
-  
-  --chart-1: oklch(0.75 0.18 80);
-  --chart-2: oklch(0.65 0.18 160);
-  --chart-3: oklch(0.55 0.15 200);
-  --chart-4: oklch(0.6 0.18 40);
-  --chart-5: oklch(0.65 0.12 280);
-  
-  --sidebar: oklch(0.2 0.015 50);
-  --sidebar-foreground: oklch(0.95 0.008 85);
-  --sidebar-primary: oklch(0.75 0.18 80);
-  --sidebar-primary-foreground: oklch(0.15 0.02 50);
-  --sidebar-accent: oklch(0.28 0.015 50);
-  --sidebar-accent-foreground: oklch(0.95 0.008 85);
-  --sidebar-border: oklch(0.32 0.015 50);
-  --sidebar-ring: oklch(0.75 0.18 80);
+  /* Brand colors */
+  --primary: oklch(0.72 0.13 80);            /* #CC9C3E Rae Yellow */
+  --primary-subdued: oklch(0.75 0.05 80);    /* #BFAC88 */
+  --secondary: oklch(0.62 0.14 145);         /* #55A254 Human Green */
+  --secondary-subdued: oklch(0.88 0.06 145); /* #C5E3C4 */
+  --accent: oklch(0.65 0.16 15);             /* #F4767A Data Coral */
+  --accent-subdued: oklch(0.93 0.03 15);     /* #FEDCDD */
+  --actor-parent: oklch(0.65 0.14 55);       /* Warm amber */
+  --neutral: oklch(0.77 0 0);                /* #B8B8B8 Text Primary */
+  --neutral-subdued: oklch(0.55 0.06 255);   /* Text Subdued — blue-tinted */
+  --neutral-vivid: oklch(0.99 0.005 85);     /* #FEFDFB (inverse of background) */
+  --background: oklch(0.18 0.04 290);        /* #140C27 Page Background */
 
-  /* Sunrise palette - golden hour/pre-dawn for dark mode */
-  --sunrise-horizon: oklch(0.65 0.15 80);    /* Richer gold */
-  --sunrise-corona: oklch(0.55 0.18 75);     /* Deeper gold */
-  --sunrise-sky-mid: oklch(0.35 0.06 280);   /* Deep lavender */
-  --sunrise-sky-upper: oklch(0.25 0.04 260); /* Deep twilight blue */
-  --sunrise-hills-near: oklch(0.30 0.08 160);/* Dark silhouette */
-  --sunrise-hills-far: oklch(0.35 0.06 160); /* Slightly lighter */
-  --sunrise-silhouette: oklch(0.20 0.06 160);/* Deep shadow */
+  /* Semantic surface tokens */
+  --card: oklch(0.22 0.04 290);
+  --popover: oklch(0.22 0.04 290);
+  --muted: oklch(0.25 0.03 290);
+  --hover: oklch(0.22 0.03 290);
+
+  /* Semantic "text on surface" tokens
+   * NOTE: --secondary-foreground and --accent-foreground intentionally use
+   * --neutral-vivid (warm white) instead of the rae-monorepo dark text values
+   * to keep light text on green/coral surfaces in dark mode. */
+  --primary-foreground: oklch(0.15 0 0);
+  --secondary-foreground: var(--neutral-vivid);
+  --accent-foreground: var(--neutral-vivid);
+  --card-foreground: oklch(0.77 0 0);
+  --popover-foreground: oklch(0.77 0 0);
+
+  /* Accessible text variants */
+  --primary-accessible: oklch(0.72 0.13 80);
+  --secondary-accessible: oklch(0.62 0.14 145);
+
+  /* Semantic UI tokens */
+  --destructive: oklch(0.55 0.20 25);
+  --border: oklch(0.30 0.03 290);
+  --input: oklch(0.25 0.03 290);
+  --ring: oklch(0.72 0.13 80);
+
+  /* Data visualization */
+  --chart-1: oklch(0.72 0.13 80);
+  --chart-2: oklch(0.62 0.14 145);
+  --chart-3: oklch(0.65 0.16 15);
+  --chart-4: oklch(0.60 0.10 40);
+  --chart-5: oklch(0.60 0.08 280);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(to right, var(--primary-subdued), var(--primary));
+  --gradient-secondary: linear-gradient(to right, var(--secondary-subdued), var(--secondary));
+
+  /* Legacy (kept for shadcn defaults) */
+  --foreground: oklch(0.77 0 0);
+  --muted-foreground: var(--neutral-subdued);
+
+  --sidebar: oklch(0.17 0.04 285);
+  --sidebar-foreground: oklch(0.77 0.00 0);
+  --sidebar-primary: oklch(0.72 0.13 80);
+  --sidebar-primary-foreground: oklch(0.18 0.04 290);
+  --sidebar-accent: oklch(0.25 0.03 290);
+  --sidebar-accent-foreground: oklch(0.77 0.00 0);
+  --sidebar-border: oklch(0.30 0.03 290);
+  --sidebar-ring: oklch(0.72 0.13 80);
 }
 
 @layer base {
@@ -181,5 +224,33 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* --- Shared entrance animation (blur-focus + rise + fade) --- */
+
+.hero-reveal {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(12px);
+  animation: heroReveal 1.1s ease-out forwards;
+  animation-play-state: paused;
+}
+
+.splash-done .hero-reveal {
+  animation-play-state: running;
+}
+
+@keyframes heroReveal {
+  0% { opacity: 0; filter: blur(8px); transform: translateY(12px); }
+  100% { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
 }
