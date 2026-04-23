@@ -1,6 +1,6 @@
-# RAE Partners Marketing Site
+# rae Marketing Site
 
-The public-facing marketing site for [RAE Partners](https://rae.partners) — Responsible Autonomous Engineering.
+The public-facing marketing site for [rae](https://raelabs.dev) — Responsible Autonomous Engineering.
 
 ## Quick Start
 

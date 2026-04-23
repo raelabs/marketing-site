@@ -29,8 +29,8 @@ test.describe('SEO Tests', () => {
           .getAttribute('href');
         expect(canonical).not.toBeNull();
         // Canonical should be a valid URL - uses Astro.site in production builds
-        // In dev/test against dev server, it will be localhost; in built output, it's rae.partners
-        expect(canonical).toMatch(/^https?:\/\/(localhost|rae\.partners)/);
+        // In dev/test against dev server, it will be localhost; in built output, it's raelabs.dev
+        expect(canonical).toMatch(/^https?:\/\/(localhost|raelabs\.dev)/);
       });
 
       test('has Open Graph tags', async ({ page }) => {

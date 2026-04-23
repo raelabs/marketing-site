@@ -29,4 +29,4 @@ The rae logo should be used as provided. Do not modify colors, proportions, or a
 
 ## Domain
 
-The primary domain is `rae.partners`.
+The primary domain is `raelabs.dev`.
