@@ -6,7 +6,7 @@ display_information:
     Central notification hub for rae partners systems. Posts to various
     channels based on the type of notification:
 
-    - Contact form submissions from rae.partners
+    - Contact form submissions from raelabs.dev
     - Deployment and build status updates
     - Monitoring and alerting notifications
     - System health updates

@@ -31,7 +31,7 @@ description: "A compelling one-sentence description of the post."
 publishedDate: 2026-01-24
 author:
   name: "Your Name"
-  email: "you@rae.partners"
+  email: "you@raelabs.dev"
   role: "Your Role"
 tags:
   - relevant-tag

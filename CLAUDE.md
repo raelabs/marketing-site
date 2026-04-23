@@ -90,7 +90,7 @@ publishedDate: 2026-01-24              # Required
 modifiedDate: 2026-01-25               # Optional
 author:
   name: "Author Name"                  # Required
-  email: "email@rae.partners"          # Optional
+  email: "email@raelabs.dev"            # Optional
   role: "Role"                         # Optional
 coAuthors:                             # Optional
   - name: "Co-author Name"
@@ -158,7 +158,7 @@ pnpm test -- --grep "smoke"  # Run specific tests
 ## Deployment
 
 Hosted on Cloudflare Pages (`rae-mktg` project):
-- **Production:** `rae.partners` (merges to main)
+- **Production:** `raelabs.dev` (merges to main)
 - **PR Previews:** `{branch}.rae-mktg.pages.dev`
 
 Configuration in `wrangler.toml`. Build: `pnpm build`, output: `dist/`
