@@ -110,22 +110,7 @@ const prefixes = [
       }, 600);
     }
 
-    // Wait for splash to finish before starting the rotation
-    function startRotation() {
-      setInterval(next, interval);
-    }
-
-    if (document.documentElement.classList.contains('splash-done')) {
-      startRotation();
-    } else {
-      var observer = new MutationObserver(function (mutations) {
-        if (document.documentElement.classList.contains('splash-done')) {
-          observer.disconnect();
-          startRotation();
-        }
-      });
-      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    }
+    setInterval(next, interval);
   })();
 </script>
 
