@@ -19,6 +19,7 @@
     "@radix-ui/react-slot": "^1.2.4",
     "@raelabs/lightpunk-tailwind": "^0.2.0",
     "@raelabs/lightpunk-tokens": "^0.2.0",
+    "@raelabs/lightpunk-ui": "^0.2.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.9",

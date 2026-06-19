@@ -18,6 +18,12 @@
 @import "@raelabs/lightpunk-tailwind";
 @import "tw-animate-css";
 
+/* Scan the lightpunk-ui primitives so Tailwind emits the utility classes baked
+ * into the published components (Button/Card/Dialog/Input/Label). Without this
+ * @source, classes used only inside node_modules wouldn't be in the content
+ * graph and their utilities would be dropped from the build. */
+@source "../../node_modules/@raelabs/lightpunk-ui";
+
 /* ── Bridge: legacy/overridden Tailwind utilities marketing relies on ──────────
  * lightpunk drops --color-foreground / --color-muted-foreground; marketing still
  * uses text-foreground, border-foreground, text-muted-foreground. It also keeps

@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/dialog';
+} from '@raelabs/lightpunk-ui';
 import { ContactForm, type ContactSource } from './ContactForm';
 
 interface ContactModalProps {
