@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import ScreenshotPlaceholder from '../../components/ScreenshotPlaceholder.astro';
+import { ContactButton } from '../../components/ContactButton';
+import { ContactForm } from '../../components/ContactForm';
+
+const pillars = [
+  {
+    title: 'Capture everything',
+    body: 'Every LLM request and response, the agent’s reasoning, every tool call and its result — captured as it happens. Not just the final diff, but the full behavioral record of how the work was actually done. If an agent did it, rae trace has it.',
+    screenshot: 'rae trace — Capture',
+    accent: 'var(--primary)',
+    layout: 'left',
+  },
+  {
+    title: 'Normalize →<br />materialize → enrich',
+    body: 'Raw agent activity becomes a coherent behavioral record through a deliberate pipeline. Normalize across harnesses into one schema, materialize into durable structured spans, then enrich with the context that makes the data answerable. A messy stream of events becomes a clean source of truth.',
+    screenshot: 'rae trace — Pipeline',
+    accent: 'var(--secondary)',
+    layout: 'right',
+  },
+  {
+    title: 'Real-time and<br />queryable',
+    body: 'The stream is live — behaviors are available the moment they happen, not after a batch job runs overnight. That’s what lets raeview surface decisions and Agent Behaviors enforce contracts while the work is still underway. Query the record of what your agents are doing, as they do it.',
+    screenshot: 'rae trace — Real-time',
+    accent: 'var(--primary)',
+    layout: 'left',
+  },
+  {
+    title: 'Cross-harness,<br />OTel-compliant, open spec',
+    body: 'rae trace speaks OpenTelemetry and works across harnesses, so the behavioral record is consistent no matter where an agent runs. The spec is open — the system of record for agent behavior shouldn’t be a black box you can’t inspect or build on.',
+    screenshot: 'rae trace — Open spec',
+    accent: 'var(--secondary)',
+    layout: 'right',
+  },
+];
+---
+
+<BaseLayout
+  title="rae trace — the system of record for your agents"
+  description="Real-time, cross-harness behavioral trace stream for coding agents. OTel-compliant, open spec — the data substrate the whole stack reads from."
+>
+  <Nav />
+
+  <main class="pt-24">
+    <!-- Hero -->
+    <section class="py-20 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="inline-block mb-6 text-sm font-medium px-3 py-1.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30">
+          Early access · technical preview
+        </span>
+        <h1 class="text-4xl md:text-6xl font-bold text-title mb-6 text-balance">
+          The system of record for everything your agents do
+        </h1>
+        <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed text-balance">
+          A real-time, cross-harness <span class="text-primary font-semibold">behavioral trace stream</span> — OTel-compliant, open spec.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <ContactButton client:load source="raetrace_cta" className="text-base px-6 py-3">
+            Request access
+          </ContactButton>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="py-20 px-6 border-y border-border bg-muted/20">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-xl md:text-2xl text-foreground leading-relaxed text-balance mb-8">
+          You can read the code an agent shipped — but the code doesn’t tell you what the agent actually <em>did</em>. The reasoning, the tool calls, the order of operations, the moments it changed course: that behavior is the real story, and most of it disappears the moment a session ends.
+        </p>
+        <p class="text-lg md:text-xl text-muted-foreground leading-relaxed text-balance max-w-3xl mx-auto">
+          Without a durable record of agent behavior, every layer above it is guessing. Review has nothing to show. Enforcement has nothing to check against. rae trace is that record — the behavioral data substrate the whole stack reads from.
+        </p>
+      </div>
+    </section>
+
+    <!-- The foundation -->
+    <section class="pt-24 pb-8 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-sm uppercase tracking-wider text-secondary mb-4">The foundation</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-title text-balance leading-tight mb-12">
+          The brain of the trust stack —<br class="hidden md:inline" /> one record everything else reads from
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
+          <div class="bg-card border border-border rounded-xl p-8">
+            <p class="text-sm uppercase tracking-wider text-muted-foreground mb-3">Without a system of record</p>
+            <p class="text-2xl font-bold text-title mb-4">Behavior vanishes when the session ends</p>
+            <p class="text-base text-muted-foreground leading-relaxed">
+              Logs are scattered, harness-specific, and ephemeral. There’s no single, queryable account of what your agents actually did — so trust has nothing solid to stand on.
+            </p>
+          </div>
+          <div class="bg-card border border-primary/40 rounded-xl p-8 shadow-sm">
+            <p class="text-sm uppercase tracking-wider text-primary mb-3">rae trace</p>
+            <p class="text-2xl font-bold text-title mb-4">A durable, queryable behavioral stream</p>
+            <p class="text-base text-muted-foreground leading-relaxed">
+              Requests, reasoning, tool calls and results — captured, normalized across harnesses, and enriched into one real-time record. The data substrate that powers review and enforcement.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pillars -->
+    <div id="pillars">
+      {pillars.map((pillar, i) => (
+        <section class="py-24 px-6">
+          <div class:list={[
+            'max-w-6xl mx-auto flex flex-col gap-12 items-center',
+            pillar.layout === 'left' ? 'md:flex-row' : 'md:flex-row-reverse',
+          ]}>
+            <div class="flex-1 w-full order-1 md:order-none">
+              <ScreenshotPlaceholder name={pillar.screenshot} accentColor={pillar.accent} />
+            </div>
+            <div class="flex-1 md:max-w-md order-2 md:order-none">
+              <p class="text-sm uppercase tracking-wider text-secondary mb-3">0{i + 1}</p>
+              <h2 class="text-3xl md:text-4xl font-bold text-title mb-4" set:html={pillar.title}></h2>
+              <p class="text-lg text-muted-foreground leading-relaxed">{pillar.body}</p>
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Powers the stack -->
+    <section class="py-16 px-6 border-y border-border">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-2xl md:text-3xl font-bold text-title mb-3">
+          Powers the whole trust stack
+        </h2>
+        <p class="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed text-balance">
+          rae trace is the system of record behind review and <a href="/products/agent-behaviors" class="text-primary underline underline-offset-4 hover:opacity-80 transition-opacity">Agent Behaviors</a> — and the foundation every agent in <a href="/products/raegent" class="text-primary underline underline-offset-4 hover:opacity-80 transition-opacity">raegent</a> is recorded against. Review and enforcement are only as good as the record they read from.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="join" class="py-24 px-6 bg-muted/20">
+      <div class="max-w-md mx-auto">
+        <div class="text-center mb-8">
+          <span class="inline-block mb-6 text-sm font-medium px-3 py-1.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30">
+            Early access · technical preview
+          </span>
+          <h2 class="text-3xl md:text-4xl font-bold text-title mb-3">
+            Build on the system of record.
+          </h2>
+          <p class="text-lg text-muted-foreground">
+            Request early access to the cross-harness behavioral trace stream and the open spec behind it.
+          </p>
+        </div>
+        <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
+          <ContactForm client:load source="raetrace_cta" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

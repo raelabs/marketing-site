@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { ContactButton } from '../components/ContactButton';
+import { ContactForm } from '../components/ContactForm';
+
+const doItems = [
+  {
+    title: 'Rearchitect the SDLC around agents',
+    body: 'Your delivery pipeline was designed for humans writing every line. We rework it for a world where agents do the bulk of the work — where review, testing, and merge gates are built for trajectories and evidence, not just diffs. The result is a software lifecycle that holds up when most of the code is agent-authored.',
+    accent: 'var(--primary)',
+  },
+  {
+    title: 'Redesign workflows and team shape',
+    body: 'Adopting agents changes who does what. We help your teams move from writing code to directing and reviewing it — defining the new loops, handoffs, and roles so engineers spend their judgment where it matters and let agents carry the rest. Velocity without losing the human accountability that keeps you safe.',
+    accent: 'var(--secondary)',
+  },
+  {
+    title: 'Stand up the trust stack',
+    body: 'We deploy the rae stack as part of the engagement — rae trace recording what agents actually do, Agent Behaviors enforcing your SDLC in real time, and raegent as the meta-harness it all runs through, with evidence-backed review built in. Oversight that scales with the agents, not against them.',
+    accent: 'var(--primary)',
+  },
+];
+
+const products = [
+  { href: '/products/agent-behaviors', label: 'Agent Behaviors', desc: 'Enforce your SDLC against what agents actually do.' },
+  { href: '/products/raegent', label: 'raegent', desc: 'The trust meta-harness — run and review every agent.' },
+  { href: '/products/rae-trace', label: 'rae trace', desc: 'The real-time record of what your agents do.' },
+];
+
+const phases = [
+  {
+    step: 'Assess',
+    body: 'We map how agents move through your SDLC today — where trust breaks down, where oversight is uneven, and where the org is exposed.',
+  },
+  {
+    step: 'Design',
+    body: 'Together we define the target operating model: the workflows, gates, and behaviors that let your teams run on agents safely.',
+  },
+  {
+    step: 'Embed',
+    body: 'We work alongside your engineers to stand up the trust stack and put the new way of working into practice on real delivery.',
+  },
+  {
+    step: 'Hand off',
+    body: 'You keep the tooling, the playbooks, and the muscle. We leave your org able to run autonomous engineering on its own.',
+  },
+];
+---
+
+<BaseLayout
+  title="Services — agentic transformation"
+  description="White-glove agentic transformation for engineering orgs. We help your teams adopt autonomous engineering safely — and leave the rae trust stack behind."
+>
+  <Nav />
+
+  <main class="pt-24">
+    <!-- Hero -->
+    <section class="py-20 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="inline-block mb-6 text-sm font-medium px-3 py-1.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30">
+          Services
+        </span>
+        <h1 class="text-4xl md:text-6xl font-bold text-title mb-6 text-balance">
+          Adopt autonomous engineering<br class="hidden md:inline" /> without betting the org.
+        </h1>
+        <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed text-balance">
+          <span class="text-primary font-semibold">Agentic transformation</span>, hands-on. We help engineering orgs rearchitect their SDLC, workflows, and teams around coding agents — the guided path into the rae stack.
+        </p>
+        <div class="mt-10 flex justify-center">
+          <ContactButton client:load source="services_cta" className="text-base px-6 py-3">
+            Talk to the team
+          </ContactButton>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who it's for -->
+    <section class="py-20 px-6 border-y border-border bg-muted/20">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-sm uppercase tracking-wider text-secondary mb-4">Who it's for</p>
+        <p class="text-xl md:text-2xl text-foreground leading-relaxed text-balance mb-8">
+          Your engineers already have agents. Your org doesn't. The tools are in everyone's hands, but the SDLC, the review gates, and the way teams work were all built for humans writing every line — so every gain in velocity arrives with a new question about risk.
+        </p>
+        <p class="text-lg md:text-xl text-muted-foreground leading-relaxed text-balance max-w-3xl mx-auto">
+          We work with the leaders carrying that tension — VPs of Engineering, CTOs, and platform teams adopting agents at team and org scale. The goal isn't more autonomy for its own sake. It's an organization that can move at the speed of agents and still stand behind everything that ships.
+        </p>
+      </div>
+    </section>
+
+    <!-- What we do -->
+    <section class="pt-24 pb-8 px-6">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <p class="text-sm uppercase tracking-wider text-secondary mb-4">What we do</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-title text-balance leading-tight">
+          Rebuild the org around coding agents — safely, and for good.
+        </h2>
+      </div>
+      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        {doItems.map((item) => (
+          <div class="bg-card border border-border rounded-xl p-8 flex flex-col">
+            <span class="inline-block w-10 h-1 rounded-full mb-5" style={`background:${item.accent}`}></span>
+            <h3 class="text-xl font-bold text-title mb-4 text-balance">{item.title}</h3>
+            <p class="text-base text-muted-foreground leading-relaxed">{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- How it connects to the products -->
+    <section class="py-24 px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <p class="text-sm uppercase tracking-wider text-secondary mb-4">Services and the products</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-title text-balance leading-tight mb-4">
+            Services is the guided path in.<br class="hidden md:inline" /> The rae stack is what stays.
+          </h2>
+          <p class="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed text-balance">
+            We don't leave you with a slide deck. The engagement stands up durable tooling your teams keep running long after we're gone — the same products that power autonomous engineering across the rae stack.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {products.map((product) => (
+            <a
+              href={product.href}
+              class="group block bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors"
+            >
+              <span class="block text-lg font-bold text-title group-hover:text-primary transition-colors mb-1">{product.label}</span>
+              <span class="block text-sm text-muted-foreground leading-relaxed">{product.desc}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- How we work -->
+    <section class="py-20 px-6 border-y border-border bg-muted/20">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <p class="text-sm uppercase tracking-wider text-secondary mb-4">How we work</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-title text-balance leading-tight mb-4">
+            Embedded, not advisory.
+          </h2>
+          <p class="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed text-balance">
+            Every engagement is shaped to your org. The arc is the same: we assess where you are, design where you're going, embed alongside your teams to get there, and hand off an org that runs autonomous engineering on its own.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {phases.map((phase, i) => (
+            <div>
+              <p class="text-sm uppercase tracking-wider text-secondary mb-3">0{i + 1} · {phase.step}</p>
+              <p class="text-base text-muted-foreground leading-relaxed">{phase.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section id="join" class="py-24 px-6">
+      <div class="max-w-md mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl md:text-4xl font-bold text-title mb-3">
+            Talk to the team.
+          </h2>
+          <p class="text-lg text-muted-foreground">
+            Tell us where your org is with agents, and we'll map the path from here to running on them safely.
+          </p>
+        </div>
+        <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
+          <ContactForm client:load source="services_cta" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
