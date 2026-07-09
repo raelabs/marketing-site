@@ -8,7 +8,7 @@ interface Props {
   objectPosition?: string;
 }
 
-const { name, accentColor = 'var(--primary)', class: className = '', imageDark, imageLight, objectPosition = 'top' } = Astro.props;
+const { name, accentColor = 'var(--lp-primary)', class: className = '', imageDark, imageLight, objectPosition = 'top' } = Astro.props;
 const hasImage = imageDark && imageLight;
 ---
 
@@ -23,7 +23,7 @@ const hasImage = imageDark && imageLight;
         <img src={imageLight} alt={`${name} screenshot`} class="screenshot-img screenshot-light w-full h-full object-cover" style={`object-position: ${objectPosition};`} loading="lazy" />
       </>
     ) : (
-      <span class="text-sm text-muted-foreground opacity-50">{name} Screenshot</span>
+      <span class="text-sm text-subtext opacity-50">{name} Screenshot</span>
     )}
   </div>
 </div>
@@ -38,7 +38,7 @@ const hasImage = imageDark && imageLight;
     inset: -3px;
     z-index: 0;
     border-radius: inherit;
-    background: linear-gradient(to bottom, color-mix(in oklch, var(--primary) 50%, transparent) 0%, transparent 80%);
+    background: linear-gradient(to bottom, color-mix(in oklch, var(--lp-primary) 50%, transparent) 0%, transparent 80%);
     filter: blur(3px);
     pointer-events: none;
   }

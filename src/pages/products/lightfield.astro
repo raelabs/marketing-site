@@ -10,7 +10,7 @@ const pillars = [
     title: 'Know when to dive in',
     body: "Lightfield watches every agent session constantly so you don't have to. Plan your next task with intention — or go touch grass without guilt.",
     screenshot: 'Lightfield — Signals',
-    accent: 'var(--primary)',
+    accent: 'var(--lp-primary)',
     layout: 'left',
     imageDark: '/images/screenshots/session-traces-focused-dark.png',
     imageLight: '/images/screenshots/session-traces-focused-light.png',
@@ -19,7 +19,7 @@ const pillars = [
     title: 'Triage your team,<br />defrag your day',
     body: 'Know which agents need you now and what they need you for. Stop whiplashing between terminal windows.',
     screenshot: 'Lightfield — Triage',
-    accent: 'var(--secondary)',
+    accent: 'var(--lp-secondary)',
     layout: 'right',
     imageDark: '/images/screenshots/agent-field-dark.png',
     imageLight: '/images/screenshots/agent-field-light.png',
@@ -28,7 +28,7 @@ const pillars = [
     title: 'Context switch in seconds',
     body: 'Decision traces catch you up instantly on the how and why, not just the diff. Review plans and code in flow without stopping your agents.',
     screenshot: 'Lightfield — Decision Traces',
-    accent: 'var(--primary)',
+    accent: 'var(--lp-primary)',
     layout: 'left',
     imageDark: '/images/screenshots/code-review-dark.png',
     imageLight: '/images/screenshots/code-review-light.png',
@@ -37,7 +37,7 @@ const pillars = [
     title: 'Go as deep as the root cause demands',
     body: 'Design review, SDLC breakdown, or a 3am incident — Lightfield gives you unparalleled replayability when you need to dig.',
     screenshot: 'Lightfield — Replay',
-    accent: 'var(--secondary)',
+    accent: 'var(--lp-secondary)',
     layout: 'right',
     imageDark: '/images/screenshots/session-traces-expanded-dark.png',
     imageLight: '/images/screenshots/session-traces-expanded-light.png',
@@ -58,7 +58,7 @@ const pillars = [
         <h1 class="text-4xl md:text-6xl font-bold text-title mb-6 text-balance">
           Accelerate your burn down,<br class="hidden md:inline" /> not your burn out
         </h1>
-        <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed text-balance">
+        <p class="text-lg md:text-xl text-subtext max-w-3xl mx-auto leading-relaxed text-balance">
           <span class="text-primary font-semibold">Lightfield</span> is the context control plane for ultra-productive agent teams.
         </p>
       </div>
@@ -67,21 +67,21 @@ const pillars = [
     <!-- Problem -->
     <section class="py-20 px-6 border-y border-border bg-muted/20">
       <div class="max-w-4xl mx-auto text-center">
-        <p class="text-xl md:text-2xl text-foreground leading-relaxed text-balance mb-12">
+        <p class="text-xl md:text-2xl text-body leading-relaxed text-balance mb-12">
           One agent is empowering. A team of them can be demoralizing. Whether you're flickering out by 11am or burning bright past midnight, the cognitive tax is killing productivity (and brain cells).
         </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-4xl mx-auto">
           <div>
             <p class="text-4xl md:text-5xl font-bold text-primary mb-2">39%</p>
-            <p class="text-sm text-muted-foreground leading-snug text-balance">more errors from AI oversight fatigue</p>
+            <p class="text-sm text-subtext leading-snug text-balance">more errors from AI oversight fatigue</p>
           </div>
           <div>
             <p class="text-4xl md:text-5xl font-bold text-primary mb-2">34%</p>
-            <p class="text-sm text-muted-foreground leading-snug">higher intent to quit</p>
+            <p class="text-sm text-subtext leading-snug">higher intent to quit</p>
           </div>
           <div>
             <p class="text-4xl md:text-5xl font-bold text-primary mb-2">91%</p>
-            <p class="text-sm text-muted-foreground leading-snug">longer PR review times</p>
+            <p class="text-sm text-subtext leading-snug">longer PR review times</p>
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@ const pillars = [
             <div class="flex-1 md:max-w-md order-2 md:order-none">
               <p class="text-sm uppercase tracking-wider text-secondary mb-3">0{i + 1}</p>
               <h2 class="text-3xl md:text-4xl font-bold text-title mb-4" set:html={pillar.title}></h2>
-              <p class="text-lg text-muted-foreground leading-relaxed">{pillar.body}</p>
+              <p class="text-lg text-subtext leading-relaxed">{pillar.body}</p>
             </div>
           </div>
         </section>
@@ -124,7 +124,7 @@ const pillars = [
         <h2 class="text-2xl md:text-3xl font-bold text-title mb-3">
           Built on rae trace
         </h2>
-        <p class="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed text-balance">
+        <p class="text-base md:text-lg text-subtext max-w-3xl mx-auto leading-relaxed text-balance">
           Every signal, decision trace, and replay is powered by the only real-time decision trace engine for coding agent harnesses. OTel-compliant, cross-harness, open spec.
         </p>
       </div>
@@ -137,7 +137,7 @@ const pillars = [
           <h2 class="text-3xl md:text-4xl font-bold text-title mb-3">
             Ship faster without flickering out.
           </h2>
-          <p class="text-lg text-muted-foreground">
+          <p class="text-lg text-subtext">
             Join the Lightfield research preview and take back your attention.
           </p>
         </div>

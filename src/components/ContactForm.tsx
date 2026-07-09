@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button, Input, Label } from '@raelabs/lightpunk-ui';
 import {
   codingAgents,
   optOutOptions,
@@ -387,7 +385,7 @@ export function ContactForm({ source, onSuccess, onClose }: ContactFormProps) {
       <div className="text-center py-8">
         <div className="text-4xl mb-4">&#10003;</div>
         <h3 className="text-xl font-semibold text-title mb-2">Thanks for reaching out!</h3>
-        <p className="text-muted-foreground mb-6">
+        <p className="text-subtext mb-6">
           We'll be in touch soon.
         </p>
         {onClose && (
@@ -560,8 +558,8 @@ export function ContactForm({ source, onSuccess, onClose }: ContactFormProps) {
                   className={cn(
                     'inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium transition-all border',
                     isSelected
-                      ? 'bg-muted text-foreground border-foreground/30'
-                      : 'bg-background hover:bg-muted border-border hover:border-foreground/30'
+                      ? 'bg-muted text-title border-title/30'
+                      : 'bg-background hover:bg-muted border-border hover:border-title/30'
                   )}
                 >
                   {option.label}
