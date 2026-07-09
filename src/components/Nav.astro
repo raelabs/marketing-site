@@ -2,32 +2,77 @@
 import Logo from './Logo.astro';
 import { ContactButton } from './ContactButton';
 
+const products = [
+  { href: '/products/agent-behaviors', label: 'Agent Behaviors', desc: 'Shared playbooks that shape how agents work' },
+  { href: '/products/raegent', label: 'raegent', desc: 'The trust meta-harness — run and review every agent' },
+  { href: '/products/rae-skills', label: 'rae skills', desc: 'Reusable, trusted skills any agent can run' },
+  { href: '/products/rae-trace', label: 'rae trace', desc: 'Full visibility into what your agents do' },
+];
+
 const navLinks = [
-  { href: '/products/lightfield', label: 'Products' },
+  { href: '/services', label: 'Services' },
   { href: '/blog', label: 'Blog' },
 ];
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
-    <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity text-foreground dark:text-primary shrink-0">
+    <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity text-title dark:text-primary shrink-0">
       <Logo class="h-14 w-auto max-[400px]:h-10" />
       <span class="text-2xl font-bold text-current">rae</span>
     </a>
 
     <!-- Desktop nav -->
     <div class="hidden md:flex items-center gap-6">
+      <!-- Products dropdown -->
+      <div id="products-dropdown" class="relative">
+        <button
+          id="products-trigger"
+          type="button"
+          class="flex items-center gap-1 text-sm font-medium text-subtext hover:text-title transition-colors"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="products-menu"
+        >
+          Products
+          <svg class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div
+          id="products-menu"
+          class="hidden absolute left-0 top-full pt-2 w-72"
+          role="menu"
+          aria-labelledby="products-trigger"
+        >
+          <div class="rounded-md border border-border bg-background shadow-lg p-2">
+            {products.map((product) => (
+              <a
+                href={product.href}
+                role="menuitem"
+                class="block rounded-md px-3 py-2 hover:bg-muted transition-colors"
+              >
+                <span class="block text-sm font-medium text-title">{product.label}</span>
+                {product.desc && (
+                  <span class="block text-xs text-subtext mt-0.5">{product.desc}</span>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          class="text-sm font-medium text-subtext hover:text-title transition-colors"
         >
           {link.label}
         </a>
       ))}
       <button
         id="theme-toggle"
-        class="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+        class="p-2 rounded-md text-subtext hover:text-title hover:bg-muted transition-colors"
         aria-label="Toggle theme"
       >
         <svg class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,7 +87,7 @@ const navLinks = [
         source="nav"
         className="text-sm font-medium px-4 py-2.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
       >
-        Join Research Preview
+        Get access
       </ContactButton>
     </div>
 
@@ -53,12 +98,11 @@ const navLinks = [
         source="nav"
         className="text-sm font-medium px-3 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors whitespace-nowrap"
       >
-        <span class="hidden min-[440px]:inline">Join Research Preview</span>
-        <span class="inline min-[440px]:hidden">Join Preview</span>
+        Get access
       </ContactButton>
       <button
         id="mobile-menu-toggle"
-        class="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+        class="p-2 rounded-md text-subtext hover:text-title hover:bg-muted transition-colors"
         aria-label="Toggle menu"
       >
         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -70,18 +114,42 @@ const navLinks = [
 
   <!-- Mobile menu panel -->
   <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-background/95 backdrop-blur-sm">
-    <div class="px-6 py-4 flex flex-col gap-3">
+    <div class="px-6 py-4 flex flex-col gap-1">
+      <!-- Products accordion -->
+      <button
+        id="mobile-products-trigger"
+        type="button"
+        class="flex items-center justify-between text-sm font-medium text-subtext hover:text-title transition-colors py-2"
+        aria-expanded="false"
+        aria-controls="mobile-products-menu"
+      >
+        <span>Products</span>
+        <svg id="mobile-products-chevron" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div id="mobile-products-menu" class="hidden flex-col gap-1 pl-4 border-l border-border ml-1">
+        {products.map((product) => (
+          <a
+            href={product.href}
+            class="block text-sm text-subtext hover:text-title transition-colors py-2"
+          >
+            {product.label}
+          </a>
+        ))}
+      </div>
+
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+          class="text-sm font-medium text-subtext hover:text-title transition-colors py-2"
         >
           {link.label}
         </a>
       ))}
       <button
         id="theme-toggle-mobile"
-        class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 text-left"
+        class="text-sm font-medium text-subtext hover:text-title transition-colors py-2 text-left"
       >
         Toggle theme
       </button>
@@ -105,9 +173,78 @@ const navLinks = [
     mobileMenu?.classList.toggle('hidden');
   });
 
+  // Mobile Products accordion
+  const mobileProductsTrigger = document.getElementById('mobile-products-trigger');
+  const mobileProductsMenu = document.getElementById('mobile-products-menu');
+  const mobileProductsChevron = document.getElementById('mobile-products-chevron');
+
+  mobileProductsTrigger?.addEventListener('click', () => {
+    const isOpen = mobileProductsMenu?.classList.toggle('hidden') === false;
+    mobileProductsTrigger.setAttribute('aria-expanded', String(isOpen));
+    mobileProductsChevron?.classList.toggle('rotate-180', isOpen);
+  });
+
+  // Close mobile menu when a link inside it is clicked
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       mobileMenu?.classList.add('hidden');
     });
+  });
+
+  // Desktop Products dropdown: hover + click/focus, Escape to close
+  const dropdown = document.getElementById('products-dropdown');
+  const trigger = document.getElementById('products-trigger');
+  const menu = document.getElementById('products-menu');
+  const chevron = trigger?.querySelector('svg');
+
+  function openMenu() {
+    menu?.classList.remove('hidden');
+    trigger?.setAttribute('aria-expanded', 'true');
+    chevron?.classList.add('rotate-180');
+  }
+
+  function closeMenu() {
+    menu?.classList.add('hidden');
+    trigger?.setAttribute('aria-expanded', 'false');
+    chevron?.classList.remove('rotate-180');
+  }
+
+  function isMenuOpen() {
+    return menu ? !menu.classList.contains('hidden') : false;
+  }
+
+  // Hover
+  dropdown?.addEventListener('mouseenter', openMenu);
+  dropdown?.addEventListener('mouseleave', closeMenu);
+
+  // Click toggles
+  trigger?.addEventListener('click', () => {
+    if (isMenuOpen()) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  // Keyboard: Escape closes and returns focus to trigger
+  dropdown?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen()) {
+      closeMenu();
+      trigger?.focus();
+    }
+  });
+
+  // Close when focus leaves the dropdown entirely
+  dropdown?.addEventListener('focusout', (e) => {
+    const next = e.relatedTarget as Node | null;
+    if (next && dropdown.contains(next)) return;
+    closeMenu();
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (dropdown && !dropdown.contains(e.target as Node)) {
+      closeMenu();
+    }
   });
 </script>

@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import ScreenshotPlaceholder from '../../components/ScreenshotPlaceholder.astro';
+import { ContactButton } from '../../components/ContactButton';
+import { ContactForm } from '../../components/ContactForm';
+
+const pillars = [
+  {
+    title: 'Define behaviors<br />as contracts',
+    body: 'Write the rules your agents must follow as deterministic policies — configured in Rego, checked the same way every time. Not “commits to main are allowed,” but “no commit until the tests it just ran passed.”',
+    screenshot: 'Agent Behaviors — Contracts',
+    accent: 'var(--lp-primary)',
+    layout: 'left',
+  },
+  {
+    title: 'Enforced in real time',
+    body: 'Checked against the agent’s live trajectory as it works — in tens of milliseconds, across massive agent fleets. Break a contract and enforcement kicks in mid-task, not after the damage is done.',
+    screenshot: 'Agent Behaviors — Real-time enforcement',
+    accent: 'var(--lp-secondary)',
+    layout: 'right',
+  },
+  {
+    title: 'Throughput,<br />not thrash',
+    body: 'Enforcement kills thrash — fewer hallucinated detours, less rework, no tokens burned on work that was never going to pass. Route each step to the right-sized model, and more of every dollar ships.',
+    screenshot: 'Agent Behaviors — Throughput',
+    accent: 'var(--lp-primary)',
+    layout: 'left',
+  },
+];
+---
+
+<BaseLayout
+  title="Agent Behaviors — proof-of-behavior enforcement"
+  description="Real-time proof-of-behavior enforcement that turns every agent action into verifiable evidence your SDLC and SOPs were actually followed."
+>
+  <Nav />
+
+  <main class="pt-24">
+    <!-- Hero -->
+    <section class="py-20 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="inline-block mb-6 text-sm font-medium px-3 py-1.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30">
+          Available now
+        </span>
+        <h1 class="text-4xl md:text-6xl font-bold text-title mb-6 text-balance">
+          Guarantee your SDLC and SOPs
+        </h1>
+        <p class="text-lg md:text-xl text-subtext max-w-3xl mx-auto leading-relaxed text-balance">
+          Real-time proof-of-behavior enforcement that turns every agent action into <span class="text-primary font-semibold">verifiable evidence</span> your SDLC was actually followed.
+        </p>
+        <div class="mt-10 flex justify-center">
+          <ContactButton client:load source="behaviors_cta" className="text-base px-6 py-3">
+            Get access
+          </ContactButton>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="py-20 px-6 border-y border-border bg-muted/20">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-xl md:text-2xl text-title leading-relaxed text-balance">
+          Coding agents move faster than any team can supervise at scale. You can cap what they’re <em>allowed</em> to do — but allowed isn’t the same as correct. Blanket guardrails can’t tell you whether an agent actually ran the tests, referenced the design doc, or did the right work at the right time.
+        </p>
+      </div>
+    </section>
+
+    <!-- Static Policies vs Agent Behaviors -->
+    <section class="py-16 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
+          <div class="bg-card border border-border rounded-xl p-8">
+            <p class="text-sm uppercase tracking-wider text-subtext mb-3">Static Policies</p>
+            <p class="text-2xl font-bold text-title mb-4">“Is this action allowed?”</p>
+            <p class="text-base text-subtext leading-relaxed">
+              Tool allowlists, cost caps, PII redaction. Global, static rules applied to every action — useful, but blind to whether the agent actually did the right work.
+            </p>
+          </div>
+          <div class="bg-card border border-primary/40 rounded-xl p-8 shadow-sm">
+            <p class="text-sm uppercase tracking-wider text-primary mb-3">Agent Behaviors</p>
+            <p class="text-2xl font-bold text-title mb-4">“Did it do the right things, at the right time, with evidence?”</p>
+            <p class="text-base text-subtext leading-relaxed">
+              Surgical, situation-specific contracts evaluated against the agent’s actual trajectory in real time. Enforcement that turns autonomy into a guarantee.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pillars -->
+    <div id="pillars">
+      {pillars.map((pillar, i) => (
+        <section class="py-24 px-6">
+          <div class:list={[
+            'max-w-6xl mx-auto flex flex-col gap-12 items-center',
+            pillar.layout === 'left' ? 'md:flex-row' : 'md:flex-row-reverse',
+          ]}>
+            <div class="flex-1 w-full order-1 md:order-none">
+              <ScreenshotPlaceholder name={pillar.screenshot} accentColor={pillar.accent} />
+            </div>
+            <div class="flex-1 md:max-w-md order-2 md:order-none">
+              <p class="text-sm uppercase tracking-wider text-secondary mb-3">0{i + 1}</p>
+              <h2 class="text-3xl md:text-4xl font-bold text-title mb-4" set:html={pillar.title}></h2>
+              <p class="text-lg text-subtext leading-relaxed">{pillar.body}</p>
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Built on rae trace -->
+    <section class="py-16 px-6 border-y border-border">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-2xl md:text-3xl font-bold text-title mb-3">
+          Built on <a href="/products/rae-trace" class="text-primary underline underline-offset-4 hover:opacity-80 transition-opacity">rae trace</a>
+        </h2>
+        <p class="text-base md:text-lg text-subtext max-w-3xl mx-auto leading-relaxed text-balance">
+          Every behavior is enforced against the live behavioral trace stream — the real-time record of what your agents actually do. OTel-compliant, cross-harness, open spec.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="join" class="py-24 px-6 bg-muted/20">
+      <div class="max-w-md mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl md:text-4xl font-bold text-title mb-3">
+            Turn autonomy into guarantees.
+          </h2>
+          <p class="text-lg text-subtext">
+            Get access and start proving your SDLC was followed — quality software, proven not promised.
+          </p>
+        </div>
+        <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
+          <ContactForm client:load source="behaviors_cta" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

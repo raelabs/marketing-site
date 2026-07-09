@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/dialog';
+} from '@raelabs/lightpunk-ui';
 import { ContactForm, type ContactSource } from './ContactForm';
 
 interface ContactModalProps {
@@ -19,7 +19,7 @@ export function ContactModal({ open, onOpenChange, source }: ContactModalProps) 
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Join the Research Preview</DialogTitle>
+          <DialogTitle>Get access</DialogTitle>
           <DialogDescription>
             It's time to trust your (agent) dev team.
           </DialogDescription>

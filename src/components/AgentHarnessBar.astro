@@ -1,22 +1,32 @@
 ---
-const tools = [
-  { name: 'Claude Code', logo: '/images/logos/claude-code.svg' },
-  { name: 'Cursor', logo: '/images/logos/cursor.svg' },
-  { name: 'Gemini CLI', logo: '/images/logos/gemini-cli.svg' },
-];
+interface Tool {
+  name: string;
+  logo: string;
+}
+
+interface Props {
+  heading?: string;
+  tools?: Tool[];
+}
+
+const {
+  heading = 'Works with your agent harness',
+  tools = [],
+} = Astro.props;
 ---
 
 <section class="py-8 px-6 border-y border-border">
   <div class="max-w-6xl mx-auto">
     <p class="text-center text-sm text-secondary uppercase tracking-wider mb-4">
-      Works with your agent harness
+      {heading}
     </p>
-    <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12">
+    <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10">
       {tools.map((tool) => (
         <img
           src={tool.logo}
           alt={tool.name}
-          class="harness-logo h-8 opacity-50 hover:opacity-80 transition-opacity"
+          class="harness-logo h-7 opacity-60 hover:opacity-90 transition-opacity"
+          onerror="const s=document.createElement('span');s.textContent=this.alt;s.className='text-lg font-semibold text-subtext';this.replaceWith(s);"
         />
       ))}
     </div>
@@ -24,7 +34,13 @@ const tools = [
 </section>
 
 <style>
+  /* Unify the official marks as a muted monochrome strip so it reads cleanly
+     on both themes (desaturates the one multicolor mark; invert lifts the dark
+     monochrome marks onto the dark-default background). */
+  .harness-logo {
+    filter: grayscale(1);
+  }
   :global(.dark) .harness-logo {
-    filter: invert(1) brightness(0.8);
+    filter: grayscale(1) invert(1) brightness(0.85);
   }
 </style>

@@ -42,7 +42,7 @@ export function ContactButton({
 
   const baseStyles = variant === 'primary'
     ? 'text-sm font-medium px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors'
-    : 'hover:text-foreground transition-colors';
+    : 'hover:text-title transition-colors';
 
   return (
     <>

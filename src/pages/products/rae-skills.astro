@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { ContactButton } from '../../components/ContactButton';
+import { ContactForm } from '../../components/ContactForm';
+---
+
+<BaseLayout
+  title="rae skills — reusable skills for every agent"
+  description="Measure once. Cut once, correctly. rae skills take autonomous work from zero to 100 with a guaranteed SDLC."
+>
+  <Nav />
+
+  <main class="pt-24">
+    <!-- Hero -->
+    <section class="py-20 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="inline-block mb-6 text-sm font-medium px-3 py-1.5 rounded-full bg-muted text-subtext border border-border">
+          Coming soon
+        </span>
+        <h1 class="text-4xl md:text-6xl font-bold text-title mb-6 text-balance">
+          Measure once. Cut once, correctly.
+        </h1>
+        <p class="text-lg md:text-xl text-subtext max-w-3xl mx-auto leading-relaxed text-balance">
+          Take autonomous work from zero-to-100 with a <span class="text-primary font-semibold">guaranteed SDLC</span>.
+        </p>
+        <div class="mt-10 flex justify-center">
+          <ContactButton client:load source="raeskills_cta" className="text-base px-6 py-3">
+            Get early access
+          </ContactButton>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's coming -->
+    <section class="py-20 px-6 border-y border-border bg-muted/20">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-sm uppercase tracking-wider text-secondary mb-4">What's coming</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-title mb-4 text-balance">
+          Turn your team's expertise into skills every agent shares
+        </h2>
+        <p class="text-lg text-subtext leading-relaxed text-balance">
+          The best way to do a task shouldn't live in one person's head or one throwaway prompt. rae skills capture proven procedures once and make them reusable across every agent and every harness — governed by the same trust the rest of the rae stack is built on.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="join" class="py-24 px-6 bg-muted/20">
+      <div class="max-w-md mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl md:text-4xl font-bold text-title mb-3">
+            Be first to build with rae skills.
+          </h2>
+          <p class="text-lg text-subtext">
+            rae skills is coming soon. Get early access and help shape it.
+          </p>
+        </div>
+        <div class="bg-card border border-border rounded-lg p-6 shadow-sm">
+          <ContactForm client:load source="raeskills_cta" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

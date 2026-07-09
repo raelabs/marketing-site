@@ -35,9 +35,9 @@ test.describe('Navigation Tests', () => {
   test('CTA buttons are present', async ({ page }) => {
     await page.goto('/');
 
-    // Check Research Preview CTA link in nav
-    const researchPreviewCTA = page.locator('button:has-text("Join Research Preview"), a:has-text("Join Research Preview")');
-    expect(await researchPreviewCTA.count()).toBeGreaterThan(0);
+    // Check Get access CTA link in nav
+    const getAccessCTA = page.locator('button:has-text("Get access"), a:has-text("Get access")');
+    expect(await getAccessCTA.count()).toBeGreaterThan(0);
   });
 
   test('blog post back navigation works', async ({ page }) => {
