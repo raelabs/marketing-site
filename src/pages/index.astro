@@ -6,58 +6,74 @@ import HeroRotating from '../components/HeroRotating.astro';
 import LogoMarquee from '../components/LogoMarquee.astro';
 import ProductSection from '../components/ProductSection.astro';
 import AgentHarnessBar from '../components/AgentHarnessBar.astro';
-import TraceBar from '../components/TraceBar.astro';
 import { ContactButton } from '../components/ContactButton';
 ---
 
 <BaseLayout
-  title="rae labs - the trust harness for autonomous engineering"
-  description="Architected for ultra-productive (agent) dev teams."
+  title="rae — the trust harness for autonomous work"
+  description="The trust harness for autonomous work. Real-time proof-of-behavior enforcement for every agent, on every team."
 >
   <Nav />
 
   <main>
     <HeroRotating />
     <LogoMarquee />
+
+    <!-- Agent Behaviors — flagship -->
     <ProductSection
       id="products"
-      headline="Manage massive agent teams with confidence"
-      body="Real-time work tracking, decision tracing, and code reviews. 2-10x your team without losing any context (or sanity)."
-      screenshotName="Lightfield"
-      screenshotAccent="var(--lp-primary)"
-      screenshotDark="/images/screenshots/session-traces-focused-dark.png"
-      screenshotLight="/images/screenshots/session-traces-focused-light.png"
+      headline="Guarantee your SDLC and SOPs"
+      body="Real-time proof-of-behavior enforcement."
+      eyebrow="Agent Behaviors"
+      screenshotName="Agent Behaviors"
+      screenshotAccent="var(--primary)"
       layout="left"
       reveal
       revealDelay="1.4s"
-      ctaText="Learn more about the context control plane"
-      ctaHref="/products/lightfield"
+      ctaText="Get access"
+      ctaHref="/products/agent-behaviors"
+      maturity="Available now"
     />
-    <AgentHarnessBar />
-    <ProductSection
-      headline="Full autonomy with full control"
-      body="Deterministic, granular, context-anchored permissions for coding agents. The blast radius of AI errors demands more than a container and a pre-commit hook."
-      screenshotName="Prism"
-      screenshotAccent="var(--lp-secondary)"
-      screenshotDark="/images/prism-hero.jpg"
-      screenshotLight="/images/prism-hero.jpg"
-      screenshotPosition="center"
-      layout="right"
-      badge="Coming in Q2"
-      badgePrefix="Prism"
-    />
-    <TraceBar />
 
+    <AgentHarnessBar />
+
+    <!-- raegent -->
+    <ProductSection
+      headline="Trust every agent. On every team. All at once."
+      body="The trust meta-harness for every coding agent — run and review the work, all in one place."
+      eyebrow="raegent"
+      screenshotName="raegent"
+      screenshotAccent="var(--secondary)"
+      layout="right"
+      ctaText="Get early access"
+      ctaHref="/products/raegent"
+      maturity="Coming soon"
+    />
+
+    <!-- rae skills -->
+    <ProductSection
+      headline="Measure once. Cut once, correctly."
+      body="Take autonomous work from zero-to-100 with a guaranteed SDLC."
+      eyebrow="rae skills"
+      screenshotName="rae skills"
+      screenshotAccent="var(--primary)"
+      layout="left"
+      ctaText="Get early access"
+      ctaHref="/products/rae-skills"
+      maturity="Coming soon"
+    />
+
+    <!-- Closing CTA -->
     <section class="py-24 px-6 bg-muted/20">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">Ready to trust your (agent) dev team?</h2>
-        <p class="text-lg text-subtext mb-8">Join the research preview and start autonomously engineering, responsibly.</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">Ready to trust your (agent) team?</h2>
+        <p class="text-lg text-muted-foreground mb-8">Enforce quality work at an efficient token spend — proven, not promised.</p>
         <ContactButton
           client:load
           source="homepage_cta"
           className="inline-block text-base font-medium px-8 py-3 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
         >
-          Join Research Preview
+          Get access
         </ContactButton>
       </div>
     </section>
