@@ -5,15 +5,9 @@
  * the canonical `--lp-*` token values for light (`:root`) and dark (`.dark`).
  * Importing it makes every Tailwind utility (bg-primary, text-title, …) resolve.
  *
- * Marketing-specific layers below the import:
- *   1. Bridge `@theme inline` — re-adds the two legacy utilities marketing still
- *      uses (text/border-foreground, text-muted-foreground) that lightpunk dropped,
- *      and re-points secondary/accent-foreground utilities at marketing's bare
- *      aliases so the dark-mode override (light text on green/coral) is preserved.
- *   2. Bridge `:root`/`.dark` — bare-token aliases (var(--primary), var(--foreground),
- *      …) consumed by hand-written CSS / component props that reference the
- *      un-namespaced names. They alias onto `--lp-*`; the few tokens lightpunk
- *      dropped (foreground, muted-foreground, gradients) keep their literal values.
+ * Marketing consumes the canonical `--lp-*` names and their utilities directly;
+ * there is no local compatibility bridge. The only site-level token override is
+ * the dark-mode `accent-foreground` tweak below.
  */
 @import "@raelabs/lightpunk-tailwind";
 @import "tw-animate-css";
@@ -24,52 +18,15 @@
  * graph and their utilities would be dropped from the build. */
 @source "../../node_modules/@raelabs/lightpunk-ui";
 
-/* ── Bridge: legacy/overridden Tailwind utilities marketing relies on ──────────
- * lightpunk drops --color-foreground / --color-muted-foreground; marketing still
- * uses text-foreground, border-foreground, text-muted-foreground. It also keeps
- * light text on green/coral surfaces in dark mode, so the *-foreground utilities
- * point at the bare aliases (overridden in .dark below) rather than --lp-* values. */
-@theme inline {
-  --color-foreground: var(--foreground);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-accent-foreground: var(--accent-foreground);
-}
-
-/* ── Bridge: bare-token aliases for hand-written CSS / component props ──────────
- * Only the un-namespaced names actually referenced via raw var() in the codebase
- * (var(--primary), var(--background), …) are aliased. Lightpunk owns the values. */
-:root {
-  /* Aliases onto canonical --lp-* tokens. */
-  --primary: var(--lp-primary);
-  --primary-subdued: var(--lp-primary-subdued);
-  --secondary: var(--lp-secondary);
-  --secondary-foreground: var(--lp-secondary-foreground);
-  --accent-foreground: var(--lp-accent-foreground);
-  --background: var(--lp-background);
-  --border: var(--lp-border);
-  --muted: var(--lp-muted);
-  --muted-foreground: var(--lp-subtext);
-
-  /* Dropped by lightpunk (legacy shadcn body text) — kept at marketing's value. */
-  --foreground: oklch(0.30 0.00 0);
-
-  /* Gradients (lightpunk has no gradient tokens) — kept verbatim. */
-  --gradient-primary: linear-gradient(to right, var(--lp-primary-subdued), var(--lp-primary));
-  --gradient-secondary: linear-gradient(to right, var(--lp-secondary-subdued), var(--lp-secondary));
-}
-
-/* ── Dark Mode overrides ───────────────────────────────────────────────────────
- * lightpunk's .dark already overrides every --lp-* token. Here we only override
- * the marketing-specific bare aliases that diverge from a straight --lp-* mapping:
- *   - --foreground: lightpunk has no equivalent; keep marketing's dark body text.
- *   - --secondary-foreground / --accent-foreground: intentionally warm white
- *     (--lp-neutral-vivid) so text stays light on green/coral surfaces in dark
- *     mode, instead of lightpunk's dark (oklch(0.15 0 0)) text-on-surface value. */
+/* ── Site-level dark-mode override ─────────────────────────────────────────────
+ * lightpunk's dark theme sets --lp-accent-foreground to a dark on-surface color.
+ * Marketing keeps light text on green/coral accent surfaces in dark mode (e.g.
+ * the DS Button's `hover:text-accent-foreground`), so we retarget the canonical
+ * token at --lp-neutral-vivid (warm white in dark mode). This overrides the DS
+ * token directly, so `text-accent-foreground` resolves correctly without any
+ * bare-alias bridge. */
 .dark {
-  --foreground: oklch(0.77 0 0);
-  --secondary-foreground: var(--lp-neutral-vivid);
-  --accent-foreground: var(--lp-neutral-vivid);
+  --lp-accent-foreground: var(--lp-neutral-vivid);
 }
 
 @layer base {
@@ -77,7 +34,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-body;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }

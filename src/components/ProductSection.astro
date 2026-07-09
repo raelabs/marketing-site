@@ -23,7 +23,7 @@ const {
   headline,
   body,
   screenshotName,
-  screenshotAccent = 'var(--primary)',
+  screenshotAccent = 'var(--lp-primary)',
   screenshotDark,
   screenshotLight,
   screenshotPosition,
@@ -42,7 +42,7 @@ const {
   {layout === 'center' ? (
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">{headline}</h2>
-      <p class="text-lg text-muted-foreground leading-relaxed">{body}</p>
+      <p class="text-lg text-subtext leading-relaxed">{body}</p>
       {badge ? (
         <span class="inline-block mt-8 text-sm font-medium px-3 py-1.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30">
           {badgePrefix ? <><strong class="font-extrabold">{badgePrefix}</strong> {badge}</> : badge}
@@ -64,7 +64,7 @@ const {
       </div>
       <div class="flex-1 md:max-w-md order-2 md:order-none">
         <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">{headline}</h2>
-        <p class="text-lg text-muted-foreground leading-relaxed">{body}</p>
+        <p class="text-lg text-subtext leading-relaxed">{body}</p>
         {badge ? (
           <span class="inline-block mt-8 text-sm font-medium px-3 py-1.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30">
             {badgePrefix ? <><strong class="font-extrabold">{badgePrefix}</strong> {badge}</> : badge}
