@@ -6,6 +6,7 @@ import HeroRotating from '../components/HeroRotating.astro';
 import LogoMarquee from '../components/LogoMarquee.astro';
 import ProductSection from '../components/ProductSection.astro';
 import AgentHarnessBar from '../components/AgentHarnessBar.astro';
+import ScreenshotPlaceholder from '../components/ScreenshotPlaceholder.astro';
 import { ContactButton } from '../components/ContactButton';
 ---
 
@@ -16,8 +17,29 @@ import { ContactButton } from '../components/ContactButton';
   <Nav />
 
   <main>
-    <HeroRotating />
-    <LogoMarquee />
+    <HeroRotating
+      title="The trust harness for autonomous work."
+      highlight="trust harness"
+      subtitle="Don't prompt and pray for quality work at an efficient token spend. Enforce it."
+    >
+      <ScreenshotPlaceholder
+        slot="media"
+        name="rae"
+        accentColor="var(--lp-primary)"
+      />
+    </HeroRotating>
+    <LogoMarquee
+      logos={[
+        { name: 'Cisco', src: '/images/logos/cisco.svg', height: 'h-10', width: 'w-20' },
+        { name: 'Twilio', src: '/images/logos/twilio.svg', height: 'h-10', width: 'w-32' },
+        { name: 'Uber', src: '/images/logos/uber.svg', height: 'h-8', width: 'w-22' },
+        { name: 'Indeed', src: '/images/logos/indeed.svg', height: 'h-8', width: 'w-28' },
+        { name: 'Berkeley SkyDeck', src: '/images/logos/berkeley-skydeck.svg', height: 'h-6', width: 'w-56' },
+        { name: 'RetailMeNot', src: '/images/logos/retailmenot.svg', height: 'h-8', width: 'w-40' },
+        { name: 'ComPsych', src: '/images/logos/compsych.svg', height: 'h-8', width: 'w-40' },
+        { name: 'Adept', src: '/images/logos/adept.svg', height: 'h-8', width: 'w-44' },
+      ]}
+    />
 
     <!-- Agent Behaviors — flagship -->
     <ProductSection
@@ -26,7 +48,7 @@ import { ContactButton } from '../components/ContactButton';
       body="Real-time proof-of-behavior enforcement."
       eyebrow="Agent Behaviors"
       screenshotName="Agent Behaviors"
-      screenshotAccent="var(--primary)"
+      screenshotAccent="var(--lp-primary)"
       layout="left"
       reveal
       revealDelay="1.4s"
@@ -35,7 +57,15 @@ import { ContactButton } from '../components/ContactButton';
       maturity="Available now"
     />
 
-    <AgentHarnessBar />
+    <AgentHarnessBar
+      heading="Works with your agent harness"
+      tools={[
+        { name: 'Claude Code', logo: '/images/logos/claude-code.svg' },
+        { name: 'Cursor', logo: '/images/logos/cursor.svg' },
+        { name: 'Antigravity', logo: '/images/logos/antigravity.svg' },
+        { name: 'Codex', logo: '/images/logos/codex.svg' },
+      ]}
+    />
 
     <!-- raegent -->
     <ProductSection
@@ -43,7 +73,7 @@ import { ContactButton } from '../components/ContactButton';
       body="The trust meta-harness for every coding agent — run and review the work, all in one place."
       eyebrow="raegent"
       screenshotName="raegent"
-      screenshotAccent="var(--secondary)"
+      screenshotAccent="var(--lp-secondary)"
       layout="right"
       ctaText="Get early access"
       ctaHref="/products/raegent"
@@ -56,7 +86,7 @@ import { ContactButton } from '../components/ContactButton';
       body="Take autonomous work from zero-to-100 with a guaranteed SDLC."
       eyebrow="rae skills"
       screenshotName="rae skills"
-      screenshotAccent="var(--primary)"
+      screenshotAccent="var(--lp-primary)"
       layout="left"
       ctaText="Get early access"
       ctaHref="/products/rae-skills"
@@ -67,7 +97,7 @@ import { ContactButton } from '../components/ContactButton';
     <section class="py-24 px-6 bg-muted/20">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">Ready to trust your (agent) team?</h2>
-        <p class="text-lg text-muted-foreground mb-8">Enforce quality work at an efficient token spend — proven, not promised.</p>
+        <p class="text-lg text-subtext mb-8">Enforce quality work at an efficient token spend — proven, not promised.</p>
         <ContactButton
           client:load
           source="homepage_cta"

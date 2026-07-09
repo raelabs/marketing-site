@@ -1,22 +1,34 @@
 ---
-import ScreenshotPlaceholder from './ScreenshotPlaceholder.astro';
+interface Props {
+  title: string;
+  highlight?: string;
+  subtitle: string;
+  revealClass?: string;
+}
+
+const { title, highlight, subtitle, revealClass = 'hero-reveal' } = Astro.props;
+
+// Split the title around the highlighted span so the emphasized phrase renders
+// inline exactly where the caller placed it (e.g. "The {highlight} for …").
+const [titleBefore, titleAfter] = highlight && title.includes(highlight)
+  ? title.split(highlight)
+  : [title, ''];
 ---
 
 <section class="pt-32 pb-16 px-6">
   <div class="max-w-6xl mx-auto">
-    <h1 class="hero-reveal text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-title mb-6 leading-[1.15]" style="animation-delay: 0.2s;">
-      The <span class="text-primary">trust harness</span> for autonomous work.
+    <h1 class:list={[revealClass, 'text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-title mb-6 leading-[1.15]']} style="animation-delay: 0.2s;">
+      {highlight ? (
+        <>{titleBefore}<span class="text-primary">{highlight}</span>{titleAfter}</>
+      ) : title}
     </h1>
 
-    <p class="hero-reveal text-lg md:text-xl text-muted-foreground max-w-2xl mb-16" style="animation-delay: 0.5s;">
-      Don't prompt and pray for quality work at an efficient token spend. Enforce it.
+    <p class:list={[revealClass, 'text-lg md:text-xl text-subtext max-w-2xl mb-16']} style="animation-delay: 0.5s;">
+      {subtitle}
     </p>
 
-    <div id="hero-screenshot" class="hero-reveal max-w-5xl" style="animation-delay: 0.8s;">
-      <ScreenshotPlaceholder
-        name="rae"
-        accentColor="var(--primary)"
-      />
+    <div id="hero-screenshot" class:list={[revealClass, 'max-w-5xl']} style="animation-delay: 0.8s;">
+      <slot name="media" />
     </div>
   </div>
 </section>

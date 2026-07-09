@@ -33,12 +33,17 @@ const hasImage = imageDark && imageLight;
     position: relative;
   }
 
+  .screenshot-placeholder {
+    /* Fallback so the shadow tints even if the caller omits accentColor. */
+    --accent: var(--lp-primary);
+  }
+
   .screenshot-shadow {
     position: absolute;
     inset: -3px;
     z-index: 0;
     border-radius: inherit;
-    background: linear-gradient(to bottom, color-mix(in oklch, var(--lp-primary) 50%, transparent) 0%, transparent 80%);
+    background: linear-gradient(to bottom, color-mix(in oklch, var(--accent) 50%, transparent) 0%, transparent 80%);
     filter: blur(3px);
     pointer-events: none;
   }

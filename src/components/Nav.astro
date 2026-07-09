@@ -29,7 +29,7 @@ const navLinks = [
         <button
           id="products-trigger"
           type="button"
-          class="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          class="flex items-center gap-1 text-sm font-medium text-subtext hover:text-title transition-colors"
           aria-expanded="false"
           aria-haspopup="true"
           aria-controls="products-menu"
@@ -52,9 +52,9 @@ const navLinks = [
                 role="menuitem"
                 class="block rounded-md px-3 py-2 hover:bg-muted transition-colors"
               >
-                <span class="block text-sm font-medium text-foreground">{product.label}</span>
+                <span class="block text-sm font-medium text-title">{product.label}</span>
                 {product.desc && (
-                  <span class="block text-xs text-muted-foreground mt-0.5">{product.desc}</span>
+                  <span class="block text-xs text-subtext mt-0.5">{product.desc}</span>
                 )}
               </a>
             ))}
@@ -119,7 +119,7 @@ const navLinks = [
       <button
         id="mobile-products-trigger"
         type="button"
-        class="flex items-center justify-between text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+        class="flex items-center justify-between text-sm font-medium text-subtext hover:text-title transition-colors py-2"
         aria-expanded="false"
         aria-controls="mobile-products-menu"
       >
@@ -132,7 +132,7 @@ const navLinks = [
         {products.map((product) => (
           <a
             href={product.href}
-            class="block text-sm text-muted-foreground hover:text-foreground transition-colors py-2"
+            class="block text-sm text-subtext hover:text-title transition-colors py-2"
           >
             {product.label}
           </a>

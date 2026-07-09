@@ -1,16 +1,24 @@
 ---
-const tools = [
-  { name: 'Claude Code', logo: '/images/logos/claude-code.svg' },
-  { name: 'Cursor', logo: '/images/logos/cursor.svg' },
-  { name: 'Antigravity', logo: '/images/logos/antigravity.svg' },
-  { name: 'Codex', logo: '/images/logos/codex.svg' },
-];
+interface Tool {
+  name: string;
+  logo: string;
+}
+
+interface Props {
+  heading?: string;
+  tools?: Tool[];
+}
+
+const {
+  heading = 'Works with your agent harness',
+  tools = [],
+} = Astro.props;
 ---
 
 <section class="py-8 px-6 border-y border-border">
   <div class="max-w-6xl mx-auto">
     <p class="text-center text-sm text-secondary uppercase tracking-wider mb-4">
-      Works with your agent harness
+      {heading}
     </p>
     <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10">
       {tools.map((tool) => (
@@ -18,7 +26,7 @@ const tools = [
           src={tool.logo}
           alt={tool.name}
           class="harness-logo h-7 opacity-60 hover:opacity-90 transition-opacity"
-          onerror="const s=document.createElement('span');s.textContent=this.alt;s.className='text-lg font-semibold text-muted-foreground';this.replaceWith(s);"
+          onerror="const s=document.createElement('span');s.textContent=this.alt;s.className='text-lg font-semibold text-subtext';this.replaceWith(s);"
         />
       ))}
     </div>

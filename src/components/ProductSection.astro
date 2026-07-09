@@ -13,6 +13,7 @@ interface Props {
   id?: string;
   reveal?: boolean;
   revealDelay?: string;
+  revealClass?: string;
   ctaText?: string;
   ctaHref?: string;
   badge?: string;
@@ -33,6 +34,7 @@ const {
   id,
   reveal = false,
   revealDelay = '0s',
+  revealClass = 'hero-reveal',
   ctaText,
   ctaHref = '#',
   badge,
@@ -42,7 +44,7 @@ const {
 } = Astro.props;
 ---
 
-<section id={id} class:list={['py-24 px-6', reveal && 'hero-reveal']} style={reveal ? `animation-delay: ${revealDelay};` : undefined}>
+<section id={id} class:list={['py-24 px-6', reveal && revealClass]} style={reveal ? `animation-delay: ${revealDelay};` : undefined}>
   {layout === 'center' ? (
     <div class="max-w-3xl mx-auto text-center">
       {eyebrow && <p class="text-sm uppercase tracking-wider text-secondary mb-3">{eyebrow}</p>}
