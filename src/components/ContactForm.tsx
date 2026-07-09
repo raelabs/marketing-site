@@ -17,7 +17,16 @@ declare global {
   }
 }
 
-export type ContactSource = 'nav' | 'footer' | 'homepage_cta' | 'team_cta' | 'contact_page' | 'lightfield_cta';
+export type ContactSource =
+  | 'nav'
+  | 'homepage_cta'
+  | 'team_cta'
+  | 'contact_page'
+  | 'behaviors_cta'
+  | 'raegent_cta'
+  | 'raetrace_cta'
+  | 'services_cta'
+  | 'raeskills_cta';
 
 interface ContactFormProps {
   source: ContactSource;
@@ -580,7 +589,7 @@ export function ContactForm({ source, onSuccess, onClose }: ContactFormProps) {
       )}
 
       <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? 'Sending...' : 'Sign Up'}
+        {isSubmitting ? 'Sending...' : 'Request access'}
       </Button>
     </form>
   );

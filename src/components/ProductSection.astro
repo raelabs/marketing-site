@@ -17,6 +17,8 @@ interface Props {
   ctaHref?: string;
   badge?: string;
   badgePrefix?: string;
+  eyebrow?: string;
+  maturity?: string;
 }
 
 const {
@@ -35,12 +37,15 @@ const {
   ctaHref = '#',
   badge,
   badgePrefix,
+  eyebrow,
+  maturity,
 } = Astro.props;
 ---
 
 <section id={id} class:list={['py-24 px-6', reveal && 'hero-reveal']} style={reveal ? `animation-delay: ${revealDelay};` : undefined}>
   {layout === 'center' ? (
     <div class="max-w-3xl mx-auto text-center">
+      {eyebrow && <p class="text-sm uppercase tracking-wider text-secondary mb-3">{eyebrow}</p>}
       <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">{headline}</h2>
       <p class="text-lg text-subtext leading-relaxed">{body}</p>
       {badge ? (
@@ -48,9 +53,12 @@ const {
           {badgePrefix ? <><strong class="font-extrabold">{badgePrefix}</strong> {badge}</> : badge}
         </span>
       ) : ctaText && (
-        <a href={ctaHref} class="inline-block mt-8 text-lg text-primary underline underline-offset-4 hover:opacity-80 transition-opacity">
-          {ctaText} →
-        </a>
+        <div class="mt-8 flex items-center justify-center gap-4 flex-wrap">
+          <a href={ctaHref} class="text-lg text-primary underline underline-offset-4 hover:opacity-80 transition-opacity">
+            {ctaText} →
+          </a>
+          {maturity && <span class="text-xs font-medium uppercase tracking-wider text-secondary px-2.5 py-1 rounded-full bg-secondary/10 border border-secondary/25">{maturity}</span>}
+        </div>
       )}
     </div>
   ) : (
@@ -63,6 +71,7 @@ const {
         <ScreenshotPlaceholder name={screenshotName} accentColor={screenshotAccent} imageDark={screenshotDark} imageLight={screenshotLight} objectPosition={screenshotPosition} />
       </div>
       <div class="flex-1 md:max-w-md order-2 md:order-none">
+        {eyebrow && <p class="text-sm uppercase tracking-wider text-secondary mb-3">{eyebrow}</p>}
         <h2 class="text-3xl md:text-4xl font-bold text-title mb-4">{headline}</h2>
         <p class="text-lg text-subtext leading-relaxed">{body}</p>
         {badge ? (
@@ -70,9 +79,12 @@ const {
             {badgePrefix ? <><strong class="font-extrabold">{badgePrefix}</strong> {badge}</> : badge}
           </span>
         ) : ctaText && (
-          <a href={ctaHref} class="inline-block mt-8 text-lg text-primary underline underline-offset-4 hover:opacity-80 transition-opacity">
-            {ctaText} →
-          </a>
+          <div class="mt-8 flex items-center gap-4 flex-wrap">
+            <a href={ctaHref} class="text-lg text-primary underline underline-offset-4 hover:opacity-80 transition-opacity">
+              {ctaText} →
+            </a>
+            {maturity && <span class="text-xs font-medium uppercase tracking-wider text-secondary px-2.5 py-1 rounded-full bg-secondary/10 border border-secondary/25">{maturity}</span>}
+          </div>
         )}
       </div>
     </div>

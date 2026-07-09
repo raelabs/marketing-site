@@ -2,19 +2,35 @@
 import Logo from './Logo.astro';
 
 const currentYear = new Date().getFullYear();
+
+const products = [
+  { href: '/products/agent-behaviors', label: 'Agent Behaviors' },
+  { href: '/products/raegent', label: 'raegent' },
+  { href: '/products/rae-skills', label: 'rae skills' },
+  { href: '/products/rae-trace', label: 'rae trace' },
+];
 ---
 
 <footer class="border-t border-border bg-muted/30">
   <div class="max-w-6xl mx-auto px-6 py-12">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="flex items-center gap-3 text-title">
+    <div class="flex flex-col md:flex-row justify-between gap-10">
+      <div class="flex items-center gap-3 text-foreground">
         <Logo class="h-8 w-auto" />
         <span class="text-sm text-subtext">rae</span>
       </div>
 
-      <div class="flex items-center gap-6 text-sm text-subtext">
-        <a href="#products" class="hover:text-title transition-colors">Products</a>
-        <a href="/blog" class="hover:text-title transition-colors">Blog</a>
+      <div class="flex flex-wrap gap-12 text-sm">
+        <div class="flex flex-col gap-2">
+          <span class="text-xs font-semibold uppercase tracking-wide text-foreground">Products</span>
+          {products.map((product) => (
+            <a href={product.href} class="text-muted-foreground hover:text-foreground transition-colors">{product.label}</a>
+          ))}
+        </div>
+        <div class="flex flex-col gap-2">
+          <span class="text-xs font-semibold uppercase tracking-wide text-foreground">Company</span>
+          <a href="/services" class="text-muted-foreground hover:text-foreground transition-colors">Services</a>
+          <a href="/blog" class="text-muted-foreground hover:text-foreground transition-colors">Blog</a>
+        </div>
       </div>
     </div>
 
